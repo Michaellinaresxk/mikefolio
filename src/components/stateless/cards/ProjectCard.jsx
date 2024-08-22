@@ -16,17 +16,17 @@ const ProjectCard = ({
   return (
     <>
       <div className="project-card__body text-white rounded-lg mt-10 overflow-hidden mx-auto ">
-        <a href={`/projects/${id}`}>
+        <Link href={`/projectDetails?id=${id}`}>
           <Image src={image} className="w-full" />
-        </a>
+        </Link>
 
         <div className="px-6 py-4">
           <h3 className="text-xl font-bold">{title}</h3>
-          <p className="text-white text-base mt-3">
+          {/* <p className="text-white text-base mt-3">
             {description.length > 120
               ? `${description.substring(0, 120)}...`
               : description}
-          </p>
+          </p> */}
         </div>
         <div className="px-6 py-4 mb-5 flex text-gray-600 justify-center">
           <a className="flex" href={repo_link} target="_blank">
