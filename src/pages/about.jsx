@@ -9,6 +9,7 @@ import { about_background_image } from "@/assets/img/index";
 import { useRef } from "react";
 import { useTransform, useScroll } from "framer-motion";
 import Image from "next/image";
+import Menu from "@/components/stateless/menu/Menu";
 
 const About = () => {
   const titleRef = useRef(null);
@@ -29,7 +30,7 @@ const About = () => {
           src={about_background_image}
         />
         <section className="about-banner  min-h-screen flex flex-col">
-          {/* <Menu /> */}
+          <Menu />
           <div className="relative bg-dark-blue text-white font-sans">
             <div className="container mx-auto px-6 py-20 text-center">
               <div className="uppercase tracking-wide text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">

@@ -9,6 +9,7 @@ import { AboutMeText } from "@/components/stateless/AboutMeText";
 import { useRef } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { WebCard } from "@/components/stateless/cards/WebCard";
+import Menu from "@/components/stateless/menu/Menu";
 import { pcyr } from "@/assets/img/webs/index";
 import { websites } from "@/data/websites";
 import { ImageAnimation } from "@/components/stateless/ImageAnimation";
@@ -37,6 +38,7 @@ export default function Home() {
       <main
         className={` transition-all ease-in flex min-h-screen flex-col items-center justify-between ${inter.className}`}
       >
+        <Menu />
         <div className="bg-home w-screen h-screen bg-slate-900 bg-opacity-0  w-full flex flex-grow h-full items-center pl-20">
           <div className="container-presentation">
             <Presentation
@@ -73,7 +75,18 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
-      <ImageAnimation image={pcyr} />
+        <ImageAnimation image={pcyr} />
+        <a
+          href={`/projects`}
+          className="flex justify-center mt-20 pb-20 inline-block text-sm md:text-base lg:text-lg font-medium leading-loose text-indigo-200 hover:text-indigo-100"
+        >
+          <h2 className="text-5xl font-bold mb-6">
+            Explore My Projects{" "}
+            <span aria-hidden="true" className="ml-2">
+              →
+            </span>
+          </h2>
+        </a>
       </div>
       <WebsSection />
       <ServicesSection />

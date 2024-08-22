@@ -1,10 +1,8 @@
-/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { variants_menu_items } from "../../../config/motion";
-import { routes } from "../../../config/constans";
-import { links } from "../../../config/constans";
+import { variants_menu_items } from "../../../config/motion"; // Asegúrate de que esta ruta esté correcta
+import { routes, links } from "../../../config/constans"; // Asegúrate de que esta ruta esté correcta
 
 const MenuItem = ({ i }) => {
   return (
@@ -14,7 +12,7 @@ const MenuItem = ({ i }) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <Link to={routes[i]}>
+      <Link href={routes[i]}>
         <span className="w-[200px] h-[20px] text-4xl ml-2 hover:text-orange-500">
           {links[i]}
         </span>
@@ -22,4 +20,5 @@ const MenuItem = ({ i }) => {
     </motion.li>
   );
 };
+
 export default MenuItem;
