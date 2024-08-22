@@ -2,32 +2,302 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  overflow-x: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
+.bg-home{
+  background-image: url("../assets/img/jupititer-1.jpg");
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+  background-size: cover;
+}
+
+.bg-about-text {
+  background-color: #000;
+  width: 100%;
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+
+
+.bg-myJourney {
+  @apply w-screen h-screen bg-[url('/src/assets/img/red-moon.jpg')] bg-cover bg-no-repeat;
+  background-position: center;
+}
+
+.bg-myJourney .bg-myJourney-title {
+  padding-top: 150px;
+}
+
+
+.about-space-ship {
+  width: 300px;
+  height: auto;
+}
+
+.transition-opacity {
+  transition: opacity 0.7s ease-in-out;
+}
+
+.quote-mark {
+  font-size: 3rem; /* Adjust the size as needed */
+  color: #f87315; /* Change to any color you like */
+  vertical-align: top;
+}
+
+.about-banner  {
+  background-color: #000;
+}
+
+.aboutMe__img {
+  max-width: 100%;
+}
+
+.menu-container{
+@apply text-white absolute top-12 right-7 w-36 h-2/5 rounded-3xl bg-gradient-to-tr from-slate-900 to-slate-200 z-20
+}
+.menu-item{
+  @apply hover:text-orange-500 font-semibold
+}
+
+.container-presentation {
+  margin-top: 400px;
+}
+
+.bg-about-page {
+  background-color: #000;
+}
+.bg-aboutme-container,
+.lasted_websites{
+  background-color: #0c0f17;
+}
+
+.myJourney-bg {
+  background-image: url('../assets/img/red-moon.jpg');
+    height: 100vh;
+    object-fit: cover;
+    width: 100%;
+
+    background-size: cover;
+}
+
+.arrow {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.refresh-menu-item{
+  @apply refresh
+}
+
+.photo-animation{
+  box-shadow: 0 0 0 1px #f87315;
+  animation: border-animation 1.8s infinite linear
+}
+
+.about-space-ship {
+  width: 80%;
+}
+
+
+.service-card {
+  background-color: #1b1b1b;
+  border: 1px solid #2a2a2a;
+  border-radius: 5px;
+}
+
+.refresh {
+  padding: 10px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #111111;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
+@keyframes border-animation {
+  0% {
+    box-shadow: 0 0 0 1px #f87315;
+  }
+
+  50% {
+    box-shadow: 0 0 0 5px #f87315;
+  }
+
+  100% {
+    box-shadow: 0 0 0 1px #f87315;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.project-card__body {
+  border: 2px solid transparent;
+  transform-origin: right bottom;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.project-card__body:hover {
+  rotate: 8deg;
+}
+
+
+.Btn {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  /* overflow: hidden; */
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+
+
+.svgContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  backdrop-filter: blur(0px);
+  letter-spacing: 0.8px;
+  border-radius: 10px;
+  transition: all 0.3s;
+  border: 1px solid rgba(156, 156, 156, 0.466);
+}
+
+.BG {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: 10px;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+
+.BG_github {
+  background: #181818;
+}
+
+.BG_youtube {
+  background: #ff0000;
+}
+
+.BG_dribble {
+  background: #ea4c89;
+}
+.BG_linkedin {
+  background: #0077b5;
+}
+.BG_dribble {
+  background: #ea4c89;
+}
+
+
+
+.Btn:hover .BG {
+  transform: rotate(35deg);
+  transform-origin: bottom;
+}
+
+.Btn:hover .svgContainer {
+  border: 1px solid rgba(255, 110, 110, 0.466);
+  background-color: rgba(219, 219, 219, 0.466);
+  backdrop-filter: blur(4px);
+}
+
+@keyframes scrolling {
+  to {
+  transform: translate(calc(-50% - 0.5rem));
+   }
   }
+
+  .scroller[data-animated="true"] .scroller__inner {
+    width: max-content;
+    flex-wrap: nowrap;
+    /* animation: scrolling Linear; */
+    animation: scrolling linear;
+    animation-timeline: scroll(root);
+  }
+
+  .scroller[data-direction="right"] .scroller__inner {
+    animation-direction: reverse;
+  }
+.footer,
+.project-details__technologies,
+.project-details__improobe,
+.project-details__description {
+  background-color: #171717;
+  border-radius: 20px;
+}
+
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 1s ease-out forwards;
 }
