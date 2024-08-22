@@ -6,7 +6,6 @@ import { ExperienceSection } from "@/components/stateless/ExperienceSection";
 import { WhatIUse } from "@/components/stateless/WhatIUse";
 import { motion } from "framer-motion";
 import { about_background_image } from "@/assets/img/index";
-// import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { useTransform, useScroll } from "framer-motion";
 import Image from "next/image";

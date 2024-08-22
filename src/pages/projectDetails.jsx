@@ -1,27 +1,29 @@
-// import { useParams } from "react-router-dom";
 // import Menu from "../../../components/stateless/menu/Menu";
 import { useRouter } from "next/router";
-import Heading from "../../../components/stateless/Heading";
-import Footer from "../../../components/stateless/Footer";
-import { projects } from "../../../data/projects";
+import Heading from "../components/stateless/Heading";
+import Footer from "../components/stateless/Footer";
+import { projects } from "../data/projects";
 import { FaEye } from "react-icons/fa";
-import CallToAction from "../../../components/stateless/CallToAction";
+import CallToAction from "../components/stateless/CallToAction";
 import Image from "next/image";
 const ProjectDetails = () => {
   const router = useRouter();
-  const { id } = router.query; // Obtiene el parámetro 'id' de la URL
+  const { id } = router.query;
 
-  // Busca el proyecto que coincide con el 'id'
   const project = projects.find((pro) => pro.id === parseInt(id));
+
+  if (!project) {
+    return <p>Proyecto no encontrado</p>;
+  }
 
   return (
     <>
       {/* <Menu /> */}
       <div className="mb-8">
         <Heading
-          title1={project.title1}
-          title2={project.title2}
-          subtitle={project.subtitle}
+          title1={project?.title1}
+          title2={project?.title2}
+          subtitle={project?.subtitle}
         />
 
         <section className="text-gray-700 body-font">
