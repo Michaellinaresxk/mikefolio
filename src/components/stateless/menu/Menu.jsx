@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { motion, useCycle } from "framer-motion";
-import { useDimensions } from "../../../../useDimensions";
 import MenuToggle from "./MenuToggle";
 import Navigation from "./Navigation";
 import { sidebar } from "../../../config/motion";
@@ -8,14 +7,12 @@ import { sidebar } from "../../../config/motion";
 const Menu = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
-  const { height } = useDimensions(containerRef);
 
   return (
     <motion.nav
       className="absolute top-5 right-5 z-50 bottom-0 w-[68px]"
       initial={false}
       animate={isOpen ? "open" : "closed"}
-      custom={height}
       ref={containerRef}
     >
       <motion.div

@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
 import { cv } from "../../assets/img/index";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export const ProfileCvSection = ({ resumeLink }) => {
+  const cvRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: cvRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen m-20">
+    <motion.div
+      ref={cvRef}
+      className="flex flex-col items-center justify-center min-h-screen m-20"
+      style={{ y }}
+    >
       <Image src={cv} alt="CV Preview" />
       <a
         href={resumeLink}
@@ -16,6 +29,6 @@ export const ProfileCvSection = ({ resumeLink }) => {
           Download CV
         </button>
       </a>
-    </div>
+    </motion.div>
   );
 };

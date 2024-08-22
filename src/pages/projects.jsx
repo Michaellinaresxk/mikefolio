@@ -1,7 +1,7 @@
 "use client";
 import ProjectCard from "@/components/stateless/cards/ProjectCard";
 import WebsiteCard from "@/components/stateless/cards/WebsiteCard";
-// import Menu from "../../components/stateless/menu/Menu";
+import Menu from "@/components/stateless/menu/Menu";
 import Heading from "@/components/stateless/Heading";
 import CallToAction from "@/components/stateless/CallToAction";
 import Footer from "@/components/stateless/Footer";
@@ -42,7 +42,7 @@ const Projects = () => {
   return (
     <>
       <div className="bg-projects">
-        {/* <Menu /> */}
+        <Menu />
         <Heading title1="My" title2="Work" subtitle="Explore my projects" />
 
         <div className="flex justify-center mt-10">
