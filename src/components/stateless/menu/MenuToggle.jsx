@@ -42,5 +42,4 @@ const MenuToggle = ({ toggle }) => {
     </button>
   );
 };
-
 export default MenuToggle;

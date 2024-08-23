@@ -21,7 +21,7 @@ const Navigation = () => (
         alt="Profile Photo"
         width={180}
         height={180}
-        className="rounded-full mt-20 border border-transparent"
+        className="w-[180px] h-[180px] rounded-full mt-20 border border-transparent photo-animation"
       />
     </motion.div>
   </motion.ul>

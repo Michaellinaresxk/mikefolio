@@ -42,6 +42,56 @@ export const projects = [
 		appImage: translator_project,
 	},
 	{
+		id: 10,
+		category: "Apps",
+		title: "Jammusik",
+		title1: "Jammusik",
+		title2: "",
+		subtitle: "Manage and organize your playlists...",
+		description:
+			"We are a useful and well thought out tool for musicians. Offering a number of features focused on the organization and management of playlists and songs, both for rehearsals and live performances.",
+		CardImage: project1,
+		projectLinks: "https://word-translator-70f04.web.app/",
+		repoLink: "https://github.com/Michaellinaresxk/Jammusik",
+		repoProvider: "GitHub",
+		technologies: [
+			"Git",
+			"React Native",
+			"Framer motion",
+			"Ion icons",
+			"Firebase",
+		],
+		whatIImprube: [
+			"Clean code (DDD) implementation, DRY, KISS, and beautifull architecture with dependency injection and providers.",
+		],
+		appImage: translator_project,
+	},
+	{
+		id: 10,
+		category: "Apps",
+		title: "XK-Web Community",
+		title1: "XK-Web",
+		title2: "Community",
+		subtitle: "Manage and organize your playlists...",
+		description:
+			"We are much more than a platform to share code snippets, we are the opportunity to improve your skills and be part of a passionate community that shares your interest in programming.",
+		CardImage: project1,
+		projectLinks: "https://word-translator-70f04.web.app/",
+		repoLink: "https://github.com/Michaellinaresxk/Jammusik",
+		repoProvider: "GitHub",
+		technologies: [
+			"Git",
+			"React Native",
+			"Framer motion",
+			"Ion icons",
+			"Firebase",
+		],
+		whatIImprube: [
+			"Clean code (DDD) implementation, DRY, KISS, and beautifull architecture with dependency injection and providers.",
+		],
+		appImage: translator_project,
+	},
+	{
 		id: 2,
 		category: "Apps",
 		title: "Gosia Recipe",
@@ -68,6 +118,7 @@ export const projects = [
 
 		appImage: gosia_project,
 	},
+
 	{
 		id: 3,
 		category: "Apps",
