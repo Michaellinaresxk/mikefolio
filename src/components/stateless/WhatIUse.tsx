@@ -50,7 +50,7 @@ export const WhatIUse = () => {
       <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-20">
         <div className="w-full lg:w-10/12 text-center lg:text-left mt-8 lg:mt-0 p-10">
           <div className="w-full flex justify-center">
-            <Image src={arrow} alt="" className="arrow" />
+            <Image src={arrow} alt="What i use" className="arrow" />
           </div>
           <h2 className="text-2xl font-bold tracking-wide text-white lg:text-6xl mb-4">
             These <span className="text-orange-500">Tools</span>

@@ -13,7 +13,7 @@ export const AboutMeText = () => {
     if (isInView) {
       mainControls.start("visible");
     }
-  }, [isInView]);
+  }, [isInView, mainControls]);
   return (
     <>
       <main className="h-screen flex bg-aboutme-container justify-center items-center flex-col">

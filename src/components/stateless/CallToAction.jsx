@@ -8,7 +8,7 @@ const CallToAction = () => {
             Got a project?
           </h2>
           <p className="text-xl md:text-3xl font-light mt-4 md:mt-6">
-            ____________________________________ Let&apos;s talk!{" "}
+            ____________________________________ Let&aposs talk!{" "}
           </p>
         </div>
         <a href={`/contact`}>

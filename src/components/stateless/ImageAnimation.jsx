@@ -27,7 +27,7 @@ export const ImageAnimation = ({ image }) => {
       className="mt-10 lg:mt-0 lg:pl-20 website_image_animation"
       style={{ opacity, scale, x }} // Applying both scale and x transformations
     >
-      <Image src={image} alt="" className="aboutMe__img" />
+      <Image src={image} alt="About me photo" className="aboutMe__img" />
     </motion.div>
   );
 };
