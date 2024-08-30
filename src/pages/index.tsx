@@ -13,6 +13,7 @@ import Menu from "@/components/stateless/menu/Menu";
 import { pcyr } from "@/assets/img/webs/index";
 import { websites } from "@/data/websites";
 import { ImageAnimation } from "@/components/stateless/ImageAnimation";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -76,7 +77,7 @@ export default function Home() {
           </div>
         </section>
         <ImageAnimation image={pcyr} />
-        <a
+        <Link
           href={`/projects`}
           className="flex justify-center mt-20 pb-20 inline-block text-sm md:text-base lg:text-lg font-medium leading-loose text-indigo-200 hover:text-indigo-100"
         >
@@ -86,7 +87,7 @@ export default function Home() {
               →
             </span>
           </h2>
-        </a>
+        </Link>
       </div>
       <WebsSection />
       <ServicesSection />
