@@ -82,7 +82,7 @@ const About = () => {
             </div>
           </main>
           <ExperienceSection />
-          <ProfileCvSection resumeLink="/src/assets/Michael Linares CV.pdf" />
+          <ProfileCvSection />
           <div className="mt-20">
             <CallToAction />
           </div>

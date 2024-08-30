@@ -3,8 +3,9 @@ import { cv } from "../../assets/img/index";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-export const ProfileCvSection = ({ resumeLink }) => {
+export const ProfileCvSection = () => {
   const cvRef = useRef(null);
+  const resumeLink = "/src/assets/Michael Linares CV.pdf";
 
   const { scrollYProgress } = useScroll({
     target: cvRef,
