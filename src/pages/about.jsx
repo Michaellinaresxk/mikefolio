@@ -75,7 +75,7 @@ const About = () => {
                   develop my knowledge in the same process.
                 </p>
                 <p className="mt-10 text-xl lg:text-3xl text-white text-right">
-                  I&aposm naturally curious and perpetually expanding{" "}
+                  I&apos;m naturally curious and perpetually expanding{" "}
                   <span className="text-orange-500">my knowledge.</span>
                 </p>
               </motion.div>
