@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 export const ProfileCvSection = () => {
   const cvRef = useRef(null);
-  const resumeLink = "../../assets/Michael-Linares-CV.pdf";
+  const resumeLink = "/Michael-Linares-CV.pdf";
 
   const { scrollYProgress } = useScroll({
     target: cvRef,
