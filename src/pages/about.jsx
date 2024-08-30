@@ -10,6 +10,7 @@ import { useRef } from "react";
 import { useTransform, useScroll } from "framer-motion";
 import Image from "next/image";
 import Menu from "@/components/stateless/menu/Menu";
+import Link from "next/link";
 
 const About = () => {
   const titleRef = useRef(null);
@@ -52,12 +53,12 @@ const About = () => {
                 </motion.h1>
               </motion.div>
               <div className="mt-8 md:mt-12 lg:mt-16">
-                <a
+                <Link
                   href={`/projects`}
                   className="inline-block text-sm md:text-base lg:text-lg font-medium leading-loose text-indigo-200 hover:text-indigo-100"
                 >
                   Latest Project <span aria-hidden="true">→</span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
