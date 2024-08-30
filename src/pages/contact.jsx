@@ -57,9 +57,9 @@ const Contact = () => {
             <div className="bg-orange-500 h-1 w-16 mb-10"></div>
             <SocialMedia size={30} />
             <div className="text-2xl mb-10 mt-6">
-              Whether you&aposre looking to discuss the latest trends, decode
+              Whether you&apos;re looking to discuss the latest trends, decode
               the mysteries of responsive design, or even fancy sponsoring a
-              digital coffee to fuel the next innovation, I&aposm just a click
+              digital coffee to fuel the next innovation, I&apos;m just a click
               away. Connect with me via the social links below.
             </div>
             <h2 className="mt-20 mb-5 text-3xl font-bold  sm:text-4xl">

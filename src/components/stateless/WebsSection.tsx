@@ -53,8 +53,8 @@ const WebsSection = () => {
               <span className="font-normal text-orange-500">UI Designs</span>
             </h2>
             <p className="mb-5 text-lg">
-              I&aposve been instrumental in creating impactful UI designs.
-              Here&aposs a curated selection that highlights my expertise and
+              I&apos;ve been instrumental in creating impactful UI designs.
+              Here&apos;s a curated selection that highlights my expertise and
               the results achieved.
             </p>
             <Link href="/projects">

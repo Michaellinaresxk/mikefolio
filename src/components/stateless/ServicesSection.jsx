@@ -30,7 +30,7 @@ const ServicesSection = () => {
               to use, aesthetically pleasing, and suits the user to the website.
             </p>
             <p className="mt-4 font-bold text-white ">
-              Let&aposs work together!
+              Let&apos;s work together!
             </p>
           </div>
 
