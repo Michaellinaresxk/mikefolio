@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 export const UICard = ({ title, imageUrl }) => {
   return (
     <div
@@ -6,7 +7,7 @@ export const UICard = ({ title, imageUrl }) => {
       style={{ width: "400px" }}
     >
       <div className="relative">
-        <img
+        <Image
           className="w-full h-50 object-cover"
           src={imageUrl}
           alt={`Project titled ${title}`}

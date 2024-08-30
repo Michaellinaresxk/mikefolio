@@ -29,7 +29,7 @@ const ServicesSection = () => {
               this reason, I can offer you a modern and innovative design, easy
               to use, aesthetically pleasing, and suits the user to the website.
             </p>
-            <p className="mt-4 font-bold text-white ">Let's work together!</p>
+            {/* <p className="mt-4 font-bold text-white ">Let's work together!</p> */}
           </div>
 
           {/* Row 2: 3D Element and Application Development */}

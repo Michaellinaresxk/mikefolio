@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { uiDesigns } from "../../data/UIDesings";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const WebsSection = () => {
   const settings = {
@@ -56,11 +57,11 @@ const WebsSection = () => {
               curated selection that highlights my expertise and the results
               achieved.
             </p>
-            <a href="/projects">
+            <Link href="/projects">
               <button className="bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium rounded-full px-8 py-4 md:px-12 md:py-6 hover:from-gray-600 hover:to-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-opacity-50 transition ease-in-out duration-300 text-lg md:text-xl shadow-lg">
                 View all
               </button>
-            </a>
+            </Link>
           </div>
           <div className="w-full md:w-8/12">
             <Slider {...settings}>

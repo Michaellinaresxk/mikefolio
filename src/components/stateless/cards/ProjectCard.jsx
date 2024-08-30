@@ -17,7 +17,7 @@ const ProjectCard = ({
     <>
       <div className="project-card__body text-white rounded-lg mt-10 overflow-hidden mx-auto ">
         <Link href={`/projectDetails?id=${id}`}>
-          <Image src={image} className="w-full" />
+          <Image src={image} alt="project image" className="w-full" />
         </Link>
 
         <div className="px-6 py-4">

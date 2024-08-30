@@ -46,7 +46,7 @@ const About = () => {
                   style={{ scale }}
                   className="relative z-10 text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] leading-none font-extrabold tracking-tight"
                 >
-                  Hello, I'm{" "}
+                  Hello, I&apos;m{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500">
                     Michael
                   </span>

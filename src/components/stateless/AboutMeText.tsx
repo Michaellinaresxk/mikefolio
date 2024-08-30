@@ -43,7 +43,7 @@ export const AboutMeText = () => {
             </motion.p>
 
             <p className="mt-10 text-xl lg:text-3xl text-white text-right">
-              Let's create something amazing{" "}
+              Let&apos;s create something amazing{" "}
               <span className="text-orange-500">together.</span>
             </p>
           </motion.section>
