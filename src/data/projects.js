@@ -14,7 +14,8 @@ import {
 	space_project,
 	translator_project,
 	weather_project,
-	xk_project
+	xk_project,
+	jammuisk
 } from "@/assets/img/projects/project-details";
 
 export const projects = [
@@ -67,7 +68,7 @@ export const projects = [
 		whatIImprube: [
 			"Clean code (DDD) implementation, DRY, KISS, and beautifull architecture with dependency injection and providers.",
 		],
-		appImage: translator_project,
+		appImage: jammuisk,
 	},
 	{
 		id: 11,

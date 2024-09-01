@@ -4,6 +4,7 @@ import translator_project from "./translator.png";
 import weather_project from "./weather.png";
 import gosia_project from "./gosia.png";
 import xk_project from "./details.png";
+import jammuisk from "./jammusik.png";
 
 export {
 	chat_project,
@@ -11,5 +12,6 @@ export {
 	translator_project,
 	weather_project,
 	gosia_project,
-	xk_project
+	xk_project,
+	jammuisk
 };
