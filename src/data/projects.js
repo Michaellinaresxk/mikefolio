@@ -106,52 +106,22 @@ export const projects = [
 			"Search for recipes using natural language queries, such as 'gluten free brownies without sugar' or 'low fat vegan cupcakes.' You can automatically calculate the nutritional information for any recipe, visualize ingredient lists, etc..",
 		CardImage: project2,
 		projectLinks: "https://gosias-s-recipe.netlify.app/",
-		repoLink: "https://github.com/Michaelxk/Gosia-Recipe",
+		repoLink: "https://github.com/Michaellinaresxk/Gosias-s-Recipe",
 		repoProvider: "GitHub",
 		technologies: [
 			"Git",
-			"Bootstrap-Vue",
+			"Vuetify",
 			"Vue.JS",
 			"Axios",
 			"API: Food Nutrition",
-			"Firebase",
+			"Netlify",
+			"Pinia"
 		],
 		whatIImprube: [
 			"This is the project that i like the most, because i enjoy a lot creating routes, bringing the recipes from Food Nutrition API, and providing to the people good and nice UI and UX experience.",
 		],
 
 		appImage: gosia_project,
-	},
-
-	{
-		id: 3,
-		category: "Apps",
-		title: "Weight on Space",
-		title1: "Weight on",
-		title2: "Space",
-		subtitle: "Do you know your weight in other planets",
-		description:
-			"Take a look at your weight on other planets to learn more about how gravity works and be amazed at how much, or how little, you weigh on other worlds.",
-		CardImage: project3,
-		projectLinks: "https://weight-on-space.web.app/",
-		repoLink: "https://github.com/Michaelxk/Weigt-on-space",
-		repoProvider: "GitHub",
-		technologies: [
-			"Git",
-			"Bootstrap-Vue",
-			"Vue.JS",
-			"Vuex",
-			"Axios",
-			"API: Nasa",
-			"Firebase",
-		],
-		whatIImprube: [
-			"I learn how to integrate Vuex, to help me with the state management, store, actiong etc.. and how to make a good refactorization of this code, to make it clear and readable.",
-			"I made the request with axios to NASA API to bring a random picture of the day when you choose your planet and organized the mathematical algorithms to calculate weight by multiplying mass by the gravity on the surface of the planet.",
-			"So, if you know your weight on Earth and the surface gravity on Earth, you can calculate your mass. You can then calculate your weight on any other planet by using the surface gravity of that planet in the same equation.",
-		],
-
-		appImage: space_project,
 	},
 
 	{

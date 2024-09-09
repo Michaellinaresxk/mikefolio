@@ -6,6 +6,7 @@ import { projects } from "../data/projects";
 import { FaEye } from "react-icons/fa";
 import CallToAction from "../components/stateless/CallToAction";
 import Image from "next/image";
+import Menu from "@/components/stateless/menu/Menu";
 const ProjectDetails = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -18,7 +19,7 @@ const ProjectDetails = () => {
 
   return (
     <>
-      {/* <Menu /> */}
+      <Menu />
       <div className="mb-8">
         <Heading
           title1={project?.title1}
