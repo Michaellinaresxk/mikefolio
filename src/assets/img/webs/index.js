@@ -19,6 +19,7 @@ import appUi1 from "./app.png";
 import appUi2 from "./app-2.png";
 import pcyr from "./pcyr.jpg";
 import website from "./website.png";
-
-export { website, web1, yacht, yacht1, web2, web3, web9, web10, web11, web12, web13, web15, web16, UI4, UI6, web33, appUi1, appUi2, pcyr };
+import pcyr2 from "./pcyr2.jpg";
+import sugar from "./sugar.png";
+export { website, web1, yacht, yacht1, web2, web3, web9, web10, web11, web12, pcyr2, web13, web15, web16, UI4, UI6, sugar, web33, appUi1, appUi2, pcyr };
 

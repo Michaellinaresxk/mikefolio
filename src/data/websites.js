@@ -16,6 +16,8 @@ import {
   yacht1,
   appUi1,
   appUi2,
+  pcyr2,
+  sugar
 } from "@/assets/img/webs";
 
 export const websites = [
@@ -55,6 +57,20 @@ export const websites = [
     title: "Porfolio Web Dev",
     CardImage: web9,
     projectLinks: "https://dribbble.com/shots/18069549-Web-Designer-portfolio",
+  },
+  {
+    id: 25,
+    category: "Websites",
+    title: "The sugar brown web",
+    CardImage: sugar,
+    projectLinks: "https://dribbble.com/shots/17873845-The-sugar-brown-beauty-store",
+  },
+  {
+    id: 26,
+    category: "Websites",
+    title: "Puntacana Yachts Rentals",
+    CardImage: pcyr2,
+    projectLinks: "https://puntacanayachtrentals.com",
   },
   {
     id: 22,

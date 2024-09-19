@@ -11,7 +11,6 @@ import {
 import {
 	chat_project,
 	gosia_project,
-	space_project,
 	translator_project,
 	weather_project,
 	xk_project,
