@@ -79,7 +79,7 @@ export const projects = [
 		description:
 			"We are much more than a platform to share code snippets, we are the opportunity to improve your skills and be part of a passionate community that shares your interest in programming.",
 		CardImage: project6,
-		projectLinks: "",
+		projectLinks: "https://xkweb-web-4ffrx7js1-xkwebs-projects.vercel.app",
 		repoLink: "https://github.com/XKcomunity/xkweb-web-app",
 		repoProvider: "GitHub",
 		technologies: [
