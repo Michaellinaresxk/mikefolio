@@ -5,7 +5,8 @@ import {
 	project4,
 	project5,
 	project6,
-	project7
+	project7,
+	project8,
 } from "@/assets/img/projects";
 
 import {
@@ -18,35 +19,36 @@ import {
 } from "@/assets/img/projects/project-details";
 
 export const projects = [
+
 	{
-		id: 1,
-		category: "Apps",
-		title: "Words Translator",
-		title1: "Words",
-		title2: "Translator",
-		subtitle: "Learn other languages...",
+		id: 6,
+		category: "Projects",
+		title: "Lux Punta Cana",
+		title1: "Weather",
+		title2: "App",
+		subtitle: "The ability to touch the soul and create lasting connections.",
 		description:
-			"It’s a Small project to providing translation for the most important languages around the world, I made this personal app because I wanted to learn polish, Italian and Russian languages, and to do it with one tool created by me.",
-		CardImage: project1,
-		projectLinks: "https://word-translator-70f04.web.app/",
-		repoLink: "https://github.com/Michaelxk/Vue-Translator",
+			"Web platform for Lux Punta Cana services. I was responsible for developing the front-end of the website using Next.js, ensuring a responsive and user-friendly design. I designed whole project and implement the visual elements and enhance the overall user experience.",
+		CardImage: project8,
+		projectLinks: "https://luxpuntacana.com/",
+		repoLink: "https://github.com/Michaellinaresxk/Plan",
 		repoProvider: "GitHub",
 		technologies: [
 			"Git",
-			"Materialize",
-			"Vue.JS",
-			"Vue-Resourse",
-			"API: Yandex",
+			"Next.js",
+			"Mercury Payments",
 			"Firebase",
+			"Typescript",
+			"Vercel"
 		],
-		whatIImprube: [
-			"I learn how to integrate Vue with Vue-Resourse for to make the request to Yandex API, chanching Bootstrap CSS Framework for Materialize, trying to dont repeat myself.",
-		],
-		appImage: translator_project,
+		whatIImprube: [],
+		appImage: weather_project,
 	},
+
+
 	{
 		id: 10,
-		category: "Apps",
+		category: "Projects",
 		title: "Jammusik",
 		title1: "Jammusik",
 		title2: "",
@@ -54,24 +56,30 @@ export const projects = [
 		description:
 			"We are a useful and well thought out tool for musicians. Offering a number of features focused on the organization and management of playlists and songs, both for rehearsals and live performances.",
 		CardImage: project7,
-		projectLinks: "https://word-translator-70f04.web.app/",
+		projectLinks: "https://jammusik.com/",
 		repoLink: "https://github.com/Michaellinaresxk/Jammusik",
 		repoProvider: "GitHub",
 		technologies: [
 			"Git",
 			"React Native",
-			"Framer motion",
+			"Typescript",
 			"Ion icons",
 			"Firebase",
+			"Node.js",
+			"Express",
+			"IOS Spotify SDK",
+			"Anthropic AI",
+			"Lyric APIs",
+			"Jest"
 		],
 		whatIImprube: [
-			"Clean code (DDD) implementation, DRY, KISS, and beautifull architecture with dependency injection and providers.",
+			"Large-scale mobile application for musicians called 'Jammusik' using React Native, applying DDD and SOLID principles toensure clean, scalable code.Idesigned and implemented acomprehensive design system for consistent UI/ UX. Built a robust backend ni Node.js for APis, leveraging Firebase for backend services and real - time synchronization.Integrated Spotify API, Al - powered audio recognition, TypeScript for type safety and code maintainability, and implemented rigorous testing with Jest to ensure high - quality deliverables.",
 		],
 		appImage: jammuisk,
 	},
 	{
 		id: 11,
-		category: "Apps",
+		category: "Projects",
 		title: "XK-Web Community",
 		title1: "XK-Web",
 		title2: "Community",
@@ -96,7 +104,7 @@ export const projects = [
 	},
 	{
 		id: 2,
-		category: "Apps",
+		category: "Projects",
 		title: "Gosia Recipe",
 		title1: "Gosia",
 		title2: "Recipe",
@@ -125,7 +133,7 @@ export const projects = [
 
 	{
 		id: 4,
-		category: "Apps",
+		category: "Projects",
 		title: "Chat Room",
 		title1: "Chat",
 		title2: "Room",
@@ -153,7 +161,7 @@ export const projects = [
 
 	{
 		id: 5,
-		category: "Apps",
+		category: "Projects",
 		title: "Weather App",
 		title1: "Weather",
 		title2: "App",
@@ -173,5 +181,32 @@ export const projects = [
 		],
 		whatIImprube: [],
 		appImage: weather_project,
+	},
+
+	{
+		id: 1,
+		category: "Projects",
+		title: "Words Translator",
+		title1: "Words",
+		title2: "Translator",
+		subtitle: "Learn other languages...",
+		description:
+			"It’s a Small project to providing translation for the most important languages around the world, I made this personal app because I wanted to learn polish, Italian and Russian languages, and to do it with one tool created by me.",
+		CardImage: project1,
+		projectLinks: "https://word-translator-70f04.web.app/",
+		repoLink: "https://github.com/Michaelxk/Vue-Translator",
+		repoProvider: "GitHub",
+		technologies: [
+			"Git",
+			"Materialize",
+			"Vue.JS",
+			"Vue-Resourse",
+			"API: Yandex",
+			"Firebase",
+		],
+		whatIImprube: [
+			"I learn how to integrate Vue with Vue-Resourse for to make the request to Yandex API, chanching Bootstrap CSS Framework for Materialize, trying to dont repeat myself.",
+		],
+		appImage: translator_project,
 	},
 ];

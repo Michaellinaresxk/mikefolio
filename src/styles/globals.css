@@ -11,7 +11,7 @@ body{
 }
 
 .bg-home{
-  background-image: url("../assets/img/jupititer-1.jpg");
+  background-image: url("../assets/img/hero.png");
   height: 100%;
   object-fit: cover;
   width: 100%;
@@ -68,9 +68,6 @@ body{
   @apply hover:text-orange-500 font-semibold
 }
 
-.container-presentation {
-  margin-top: 400px;
-}
 
 .bg-about-page {
   background-color: #000;
