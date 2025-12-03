@@ -1,3 +1,4 @@
+// data/uiDesigns.js
 import {
   web12,
   UI4,
@@ -30,7 +31,7 @@ const createUIDesign = ({ id, title, cardImage, projectLinks }) => ({
 /**
  * All UI designs data
  */
-export const uiDesigns = [
+export const uiDesign = [
   createUIDesign({
     id: 1,
     title: 'Let the adventure begin',
@@ -129,14 +130,14 @@ export const uiDesigns = [
  * @returns {Object|undefined} UI Design object or undefined
  */
 export const getUIDesignById = (id) => {
-  return uiDesigns.find((design) => design.id === id);
+  return uiDesign.find((design) => design.id === id);
 };
 
 /**
  * Get total count of UI designs
  * @returns {number} Total number of UI designs
  */
-export const getUIDesignsCount = () => uiDesigns.length;
+export const getUIDesignsCount = () => uiDesign.length;
 
 /**
  * Check if a design is from Dribbble
