@@ -22,7 +22,7 @@ const Presentation = ({ title1, title2, subtitle }: PresentationProps) => {
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
           }`}
         >
-          <h1 className='text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight leading-tight'>
+          <h1 className='text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight leading-tight'>
             <span
               className={`block text-white/90 drop-shadow-2xl transition-all duration-1000 delay-200 ${
                 isVisible
@@ -56,7 +56,7 @@ const Presentation = ({ title1, title2, subtitle }: PresentationProps) => {
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
         }`}
       >
-        <p className='text-lg md:text-xl lg:text-2xl font-medium text-white/80 backdrop-blur-sm'>
+        <p className='text-lg md:text-xl lg:text-1xl font-medium text-white/80'>
           <span className='relative inline-block pb-4'>
             {subtitle}
             <span

@@ -11,11 +11,12 @@ body{
 }
 
 .bg-home{
-  background-image: url("../assets/img/jupititer-1.jpg");
-  height: 100vh;
-  object-fit: cover;
+  background-image: url("../assets/img/space.png");
+  min-height: 100%;
   width: 100%;
+  max-width: 100%;
   background-size: cover;
+  background-position: center;
 }
 
 .bg-about-text {
