@@ -7,10 +7,9 @@ import CallToAction from '@/components/stateless/CallToAction';
 import Footer from '@/components/stateless/Footer';
 import { projects } from '@/data/projects';
 import { websites } from '@/data/websites';
-import { uiDesign } from '@/data/uiDesign';
+import { uiDesign } from '@/data/UIDesign';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { ANIMATION_VARIANTS } from '@/constants/animations';
 
 const Projects = () => {
   const filterCategories = ['All', 'Apps', 'Websites', 'UI Designs'];
