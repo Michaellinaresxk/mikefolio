@@ -1,4 +1,4 @@
-// data/websites.js
+// data/websites.ts
 import {
   yacht,
   yacht1,
@@ -9,15 +9,19 @@ import {
   web10,
   web11,
 } from '@/assets/img/webs';
+import { Website, WebsiteConfig } from '@/types/website';
 
 /**
  * Website factory function
- * @param {Object} config - Website configuration
- * @returns {Object} Website object
  */
-const createWebsite = ({ id, title, cardImage, projectLinks }) => ({
+const createWebsite = ({
   id,
-  category: 'Websites',
+  title,
+  cardImage,
+  projectLinks,
+}: WebsiteConfig): Website => ({
+  id,
+  category: 'Websites' as const,
   title,
   CardImage: cardImage,
   projectLinks,
@@ -26,7 +30,7 @@ const createWebsite = ({ id, title, cardImage, projectLinks }) => ({
 /**
  * All websites data
  */
-export const websites = [
+export const websites: readonly Website[] = [
   createWebsite({
     id: 1,
     title: 'PCYR',
@@ -52,7 +56,8 @@ export const websites = [
     id: 4,
     title: 'The sugar brown web',
     cardImage: sugar,
-    projectLinks: 'https://dribbble.com/shots/17873845-The-sugar-brown-beauty-store',
+    projectLinks:
+      'https://dribbble.com/shots/17873845-The-sugar-brown-beauty-store',
   }),
 
   createWebsite({
@@ -86,15 +91,12 @@ export const websites = [
 
 /**
  * Get website by ID
- * @param {number} id - Website ID
- * @returns {Object|undefined} Website object or undefined
  */
-export const getWebsiteById = (id) => {
+export const getWebsiteById = (id: number): Website | undefined => {
   return websites.find((website) => website.id === id);
 };
 
 /**
  * Get total count of websites
- * @returns {number} Total number of websites
  */
-export const getWebsitesCount = () => websites.length;
+export const getWebsitesCount = (): number => websites.length;

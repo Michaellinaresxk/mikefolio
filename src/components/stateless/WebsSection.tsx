@@ -4,7 +4,8 @@ import { WebCard } from './cards/WebCard';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { uiDesign, uiDesigns } from '../../data/UIDesign';
+import { UIDesign } from '../../types/uiDesign';
+import { uiDesign } from '../../data/UIDesign';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -44,41 +45,45 @@ const WebsSection = () => {
   };
 
   return (
-    <>
-      <motion.div className='container mx-auto px-4 sm:px-6 lg:px-8 py-20 '>
-        <div className='flex flex-col md:flex-row md:items-center gap-10'>
-          <div className='w-full md:w-4/12'>
-            <h2 className='text-5xl font-bold mb-6'>
-              Latest{' '}
-              <span className='font-normal text-orange-500'>UI Designs</span>
-            </h2>
-            <p className='mb-5 text-lg'>
-              I&apos;ve been instrumental in creating impactful UI designs.
-              Here&apos;s a curated selection that highlights my expertise and
-              the results achieved.
-            </p>
-            <Link href='/projects'>
-              <button className='bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium rounded-full px-8 py-4 md:px-12 md:py-6 hover:from-gray-600 hover:to-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-opacity-50 transition ease-in-out duration-300 text-lg md:text-xl shadow-lg'>
-                View all
-              </button>
-            </Link>
-          </div>
-          <div className='w-full md:w-8/12'>
-            <Slider {...settings}>
-              {uiDesign.map((web) => (
-                <div key={web.id} className='p-4'>
-                  <WebCard
-                    title={web.title}
-                    imageUrl={web.CardImage}
-                    cardWidht='380px'
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
+    <motion.div
+      className='container mx-auto px-4 sm:px-6 lg:px-8 py-20'
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className='flex flex-col md:flex-row md:items-center gap-10'>
+        <div className='w-full md:w-4/12'>
+          <h2 className='text-5xl font-bold mb-6'>
+            Latest{' '}
+            <span className='font-normal text-orange-500'>UI Designs</span>
+          </h2>
+          <p className='mb-5 text-lg'>
+            I&apos;ve been instrumental in creating impactful UI designs.
+            Here&apos;s a curated selection that highlights my expertise and the
+            results achieved.
+          </p>
+          <Link href='/projects'>
+            <button className='bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium rounded-full px-8 py-4 md:px-12 md:py-6 hover:from-gray-600 hover:to-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-opacity-50 transition ease-in-out duration-300 text-lg md:text-xl shadow-lg'>
+              View all
+            </button>
+          </Link>
         </div>
-      </motion.div>
-    </>
+
+        <div className='w-full md:w-8/12'>
+          <Slider {...settings}>
+            {uiDesign.map((web: UIDesign) => (
+              <div key={web.id} className='p-4'>
+                <WebCard
+                  title={web.title}
+                  imageUrl={web.CardImage}
+                  cardWidht='380px'
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 

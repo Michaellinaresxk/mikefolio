@@ -1,4 +1,4 @@
-// data/uiDesigns.js
+// data/uiDesign.ts
 import {
   web12,
   UI4,
@@ -14,15 +14,19 @@ import {
   web15,
   web16,
 } from '@/assets/img/webs';
+import { UIDesign, UIDesignConfig } from '@/types/uiDesign';
 
 /**
  * UI Design factory function
- * @param {Object} config - UI Design configuration
- * @returns {Object} UI Design object
  */
-const createUIDesign = ({ id, title, cardImage, projectLinks }) => ({
+const createUIDesign = ({
   id,
-  category: 'UI Designs',
+  title,
+  cardImage,
+  projectLinks,
+}: UIDesignConfig): UIDesign => ({
+  id,
+  category: 'UI Designs' as const, // ← Agregar 'as const'
   title,
   CardImage: cardImage,
   projectLinks,
@@ -31,7 +35,8 @@ const createUIDesign = ({ id, title, cardImage, projectLinks }) => ({
 /**
  * All UI designs data
  */
-export const uiDesign = [
+export const uiDesign: readonly UIDesign[] = [
+  // ← Cambiar a readonly
   createUIDesign({
     id: 1,
     title: 'Let the adventure begin',
@@ -64,14 +69,16 @@ export const uiDesign = [
     id: 5,
     title: '3D Portfolio',
     cardImage: UI4,
-    projectLinks: 'https://dribbble.com/shots/18069523-3D-Portfolio-for-web-developer',
+    projectLinks:
+      'https://dribbble.com/shots/18069523-3D-Portfolio-for-web-developer',
   }),
 
   createUIDesign({
     id: 6,
     title: 'McLaren Elva',
     cardImage: web13,
-    projectLinks: 'https://dribbble.com/shots/17863682-McLaren-Elva-presentation-website',
+    projectLinks:
+      'https://dribbble.com/shots/17863682-McLaren-Elva-presentation-website',
   }),
 
   createUIDesign({
@@ -113,7 +120,8 @@ export const uiDesign = [
     id: 12,
     title: 'Guitar instructor locator',
     cardImage: appUi1,
-    projectLinks: 'https://dribbble.com/shots/18239915-Guitar-instructor-locator-app',
+    projectLinks:
+      'https://dribbble.com/shots/18239915-Guitar-instructor-locator-app',
   }),
 
   createUIDesign({
@@ -126,24 +134,19 @@ export const uiDesign = [
 
 /**
  * Get UI design by ID
- * @param {number} id - UI Design ID
- * @returns {Object|undefined} UI Design object or undefined
  */
-export const getUIDesignById = (id) => {
+export const getUIDesignById = (id: number): UIDesign | undefined => {
   return uiDesign.find((design) => design.id === id);
 };
 
 /**
  * Get total count of UI designs
- * @returns {number} Total number of UI designs
  */
-export const getUIDesignsCount = () => uiDesign.length;
+export const getUIDesignsCount = (): number => uiDesign.length;
 
 /**
  * Check if a design is from Dribbble
- * @param {Object} design - UI Design object
- * @returns {boolean} True if hosted on Dribbble
  */
-export const isDribbbleDesign = (design) => {
+export const isDribbbleDesign = (design: UIDesign): boolean => {
   return design.projectLinks.includes('dribbble.com');
 };
