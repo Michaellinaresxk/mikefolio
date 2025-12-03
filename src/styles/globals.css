@@ -68,9 +68,7 @@ body{
   @apply hover:text-orange-500 font-semibold
 }
 
-.container-presentation {
-  margin-top: 400px;
-}
+
 
 .bg-about-page {
   background-color: #000;

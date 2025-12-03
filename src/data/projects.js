@@ -5,7 +5,8 @@ import {
 	project4,
 	project5,
 	project6,
-	project7
+	project7,
+	project8,
 } from "@/assets/img/projects";
 
 import {
