@@ -55,7 +55,7 @@ export const projects = [
 		description:
 			"We are a useful and well thought out tool for musicians. Offering a number of features focused on the organization and management of playlists and songs, both for rehearsals and live performances.",
 		CardImage: project7,
-		projectLinks: "https://word-translator-70f04.web.app/",
+		projectLinks: "https://jammusik.com",
 		repoLink: "https://github.com/Michaellinaresxk/Jammusik",
 		repoProvider: "GitHub",
 		technologies: [
