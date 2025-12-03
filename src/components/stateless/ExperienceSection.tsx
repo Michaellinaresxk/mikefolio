@@ -31,6 +31,51 @@ interface ExperienceItemProps {
   index: number;
 }
 
+/**
+ * Componente de experiencia individual
+ */
+const ExperienceItem = ({ experience, index }: ExperienceItemProps) => {
+  return (
+    <motion.div
+      className='border-b border-gray-600 pb-6 sm:pb-8 md:pb-10 last:border-b-0'
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      viewport={{ once: true, margin: '-50px' }}
+    >
+      <div className='flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4'>
+        {/* Lado izquierdo: Título y empresa */}
+        <div className='flex-1'>
+          <h3 className='text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-white'>
+            {experience.title}
+          </h3>
+          <h5 className='text-base sm:text-lg text-gray-400 hover:text-gray-300 transition-colors'>
+            {experience.company}
+          </h5>
+        </div>
+
+        {/* Lado derecho: Período y ubicación */}
+        <div className='text-left sm:text-right flex-shrink-0 min-w-fit'>
+          <h6 className='text-sm sm:text-base md:text-lg text-gray-400 font-medium'>
+            {experience.period}
+          </h6>
+          <h6 className='text-sm sm:text-base md:text-lg text-gray-500'>
+            {experience.location}
+          </h6>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+/**
+ * ExperienceSection Standalone
+ * Sin dependencias externas, completamente responsive
+ *
+ * Props:
+ * - imageSrc: URL o import de tu imagen
+ * - imagePosition: "left" | "right" (default: "left")
+ */
 interface ExperienceSectionProps {
   imageSrc?: string;
   imagePosition?: 'left' | 'right';
