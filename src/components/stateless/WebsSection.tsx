@@ -110,7 +110,6 @@ const WebsSection = () => {
                 <WebCard
                   title={web.title}
                   imageUrl={web.CardImage}
-                  id={web.id}
                   cardWidht='100%'
                 />
               </motion.div>

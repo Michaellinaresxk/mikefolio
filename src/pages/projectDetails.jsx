@@ -150,7 +150,7 @@ const ProjectDetails = () => {
               >
                 <div className='flex items-center gap-3 mb-6'>
                   <div className='w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full group-hover:h-10 transition-all' />
-                  <h2 className='text-3xl font-bold text-white'>Descripción</h2>
+                  <h2 className='text-3xl font-bold text-white'>Description</h2>
                 </div>
 
                 <div className='text-gray-300 text-lg leading-relaxed space-y-4'>
@@ -170,7 +170,7 @@ const ProjectDetails = () => {
                 <div className='flex items-center gap-3 mb-8'>
                   <div className='w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full' />
                   <h2 className='text-3xl font-bold text-white'>
-                    Mejoras Implementadas
+                    Improvements Implemented
                   </h2>
                 </div>
 
@@ -205,7 +205,9 @@ const ProjectDetails = () => {
               >
                 <div className='flex items-center gap-3 mb-6'>
                   <div className='w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full' />
-                  <h3 className='text-2xl font-bold text-white'>Tecnologías</h3>
+                  <h3 className='text-2xl font-bold text-white'>
+                    Technologies
+                  </h3>
                 </div>
 
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
@@ -239,7 +241,7 @@ const ProjectDetails = () => {
                 >
                   <button className='w-full flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-orange-500/50 group'>
                     <FaEye className='group-hover:animate-pulse' />
-                    Ver Proyecto
+                    Real life Project
                   </button>
                 </motion.a>
 
@@ -253,7 +255,7 @@ const ProjectDetails = () => {
                 >
                   <button className='w-full flex items-center justify-center gap-2 bg-gray-900 border border-gray-700 hover:border-orange-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 group'>
                     <FaGithub className='group-hover:rotate-12 transition-transform' />
-                    Ver Código
+                    View Code
                   </button>
                 </motion.a>
               </motion.div>
