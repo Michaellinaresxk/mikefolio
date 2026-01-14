@@ -1,121 +1,325 @@
-// import Menu from "../../../components/stateless/menu/Menu";
-import { useRouter } from "next/router";
-import Heading from "../components/stateless/Heading";
-import Footer from "../components/stateless/Footer";
-import { projects } from "../data/projects";
-import { FaEye } from "react-icons/fa";
-import CallToAction from "../components/stateless/CallToAction";
-import Image from "next/image";
-import Menu from "@/components/stateless/menu/Menu";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { FaEye, FaGithub } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import Heading from '../components/stateless/Heading';
+import Footer from '../components/stateless/Footer';
+import CallToAction from '../components/stateless/CallToAction';
+import Menu from '@/components/stateless/menu/Menu';
+import { projects } from '../data/projects';
+
 const ProjectDetails = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [isLoading, setIsLoading] = useState(true);
 
   const project = projects.find((pro) => pro.id === parseInt(id));
 
-  if (!project) {
-    return <p>Proyecto no encontrado</p>;
+  useEffect(() => {
+    setIsLoading(!project);
+  }, [project]);
+
+  if (isLoading || !project) {
+    return (
+      <div className='flex items-center justify-center min-h-screen text-white bg-black'>
+        <motion.div
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className='text-2xl'
+        >
+          Cargando proyecto...
+        </motion.div>
+      </div>
+    );
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: 'easeOut' },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, ease: 'easeOut' },
+    },
+  };
+
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <Menu />
-      <div className="mb-8">
-        <Heading
-          title1={project?.title1}
-          title2={project?.title2}
-          subtitle={project?.subtitle}
+
+      {/* Hero Section */}
+      <motion.section
+        variants={containerVariants}
+        initial='hidden'
+        animate='visible'
+        className='relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-gray-800 to-black overflow-hidden'
+      >
+        <div
+          className='absolute inset-0 opacity-10'
+          style={{
+            backgroundImage: `
+            linear-gradient(0deg, transparent 24%, rgba(255, 140, 0, 0.05) 25%, rgba(255, 140, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 140, 0, 0.05) 75%, rgba(255, 140, 0, 0.05) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, rgba(255, 140, 0, 0.05) 25%, rgba(255, 140, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 140, 0, 0.05) 75%, rgba(255, 140, 0, 0.05) 76%, transparent 77%, transparent)
+          `,
+            backgroundSize: '50px 50px',
+            animation: 'grid-fade 6s ease-in-out infinite',
+          }}
         />
 
-        <section className="text-gray-700 body-font">
-          <div className="container px-5 py-24 mx-auto flex flex-wrap text-white">
-            <div className="lg:w-1/3 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
-              <Image
-                alt="feature"
-                className="object-cover object-center h-300  w-full"
-                src={project.appImage}
-              />
+        <motion.div variants={itemVariants} className='relative z-10 mb-12'>
+          <Heading
+            title1={project.title1}
+            title2={project.title2}
+            subtitle={project.subtitle}
+          />
+        </motion.div>
 
-              <div className="project-details__technologies p-10 mt-20">
-                <h2 className=" mb-4 text-white text-3xl">Technologies:</h2>
-                <div className="text-orange-500 h-1 w-16 mb-10"></div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-4 mt-2.5">
-                  {project.technologies.map((technology, index) => (
-                    <div
+        <style>{`
+          @keyframes grid-fade {
+            0% { opacity: 0.05; }
+            50% { opacity: 0.15; }
+            100% { opacity: 0.05; }
+          }
+        `}</style>
+      </motion.section>
+
+      {/* Main Content */}
+      <section className='relative bg-black py-16 px-4 sm:px-6 lg:px-8'>
+        <motion.div
+          variants={containerVariants}
+          initial='hidden'
+          animate='visible'
+          className='max-w-7xl mx-auto'
+        >
+          <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12'>
+            {/* Sidebar - Left Column */}
+            <motion.div
+              variants={itemVariants}
+              className='lg:col-span-1 space-y-6'
+            >
+              {/* Project Image */}
+              <motion.div
+                variants={imageVariants}
+                className='relative rounded-xl overflow-hidden shadow-2xl group'
+              >
+                <div className='absolute inset-0 bg-gradient-to-r from-orange-500 to-red-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 z-10' />
+                <Image
+                  alt={project.title1}
+                  className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
+                  src={project.appImage}
+                  width={400}
+                  height={300}
+                  priority
+                />
+              </motion.div>
+            </motion.div>
+
+            {/* Main Content - Right Column */}
+            <motion.div
+              variants={itemVariants}
+              className='lg:col-span-2 space-y-8'
+            >
+              {/* Description */}
+              <motion.div
+                variants={itemVariants}
+                className='bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-orange-500 transition-colors group'
+              >
+                <div className='flex items-center gap-3 mb-6'>
+                  <div className='w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full group-hover:h-10 transition-all' />
+                  <h2 className='text-3xl font-bold text-white'>Descripción</h2>
+                </div>
+
+                <div className='text-gray-300 text-lg leading-relaxed space-y-4'>
+                  {typeof project.description === 'string' ? (
+                    <p>{project.description}</p>
+                  ) : (
+                    project.description
+                  )}
+                </div>
+              </motion.div>
+
+              {/* Improvements */}
+              <motion.div
+                variants={itemVariants}
+                className='bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-orange-500 transition-colors'
+              >
+                <div className='flex items-center gap-3 mb-8'>
+                  <div className='w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full' />
+                  <h2 className='text-3xl font-bold text-white'>
+                    Mejoras Implementadas
+                  </h2>
+                </div>
+
+                <div className='space-y-4'>
+                  {project.whatIImprube?.map((improvement, index) => (
+                    <motion.div
                       key={index}
-                      className="flex items-center text-white p-1 rounded-lg"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className='flex gap-4 p-4 bg-gray-800 rounded-lg border-l-4 border-orange-500 hover:bg-gray-700 transition-colors group'
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-6 h-6 mx-2 text-orange-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      <span className="mx-2">{technology}</span>
-                    </div>
+                      <div className='flex-shrink-0'>
+                        <motion.div
+                          whileHover={{ scale: 1.2 }}
+                          className='flex items-center justify-center h-8 w-8 rounded-md bg-orange-500/20 group-hover:bg-orange-500/40 transition-colors'
+                        >
+                          <div className='w-2 h-2 bg-orange-500 rounded-full' />
+                        </motion.div>
+                      </div>
+                      <div className='flex-grow'>
+                        <p className='text-gray-300 text-lg'>{improvement}</p>
+                      </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
+              {/* Technologies Card */}
+              <motion.div
+                variants={itemVariants}
+                className='bg-gray-900 rounded-xl p-6 border border-gray-800 hover:border-orange-500 transition-colors'
+              >
+                <div className='flex items-center gap-3 mb-6'>
+                  <div className='w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full' />
+                  <h3 className='text-2xl font-bold text-white'>Tecnologías</h3>
+                </div>
 
-              <h2 className=" text-3xl mt-10 mb-4">QuickLinks:</h2>
-              <div className="bg-orange-500 h-1 w-16 mb-6"></div>
-              <div className="flex mt-10">
-                <a className="flex" href={project.projectLinks} target="_blank">
-                  <button className="flex gap-3cursor-pointer ml-5 text-white font-semibold bg-gradient-to-r from-gray-800 to-black px-7 py-3 rounded-full border border-gray-600 hover:scale-105 duration-200 hover:text-gray-500 hover:border-gray-800 hover:from-black hover:to-gray-900">
-                    <FaEye className="mr-2" size={25} />
-                    {project.title1} {project.title2}
-                  </button>
-                </a>
-                <a className="flex" href={project.repoLink} target="_blank">
-                  <button className="flex gap-3  ml-10   cursor-pointer text-white font-semibold bg-gradient-to-r from-gray-800 to-black px-7 py-3 rounded-full border border-gray-600 hover:scale-105 duration-200 hover:text-gray-500 hover:border-gray-800 hover:from-black hover:to-gray-900">
-                    <svg
-                      viewBox="0 0 24 24"
-                      height="24"
-                      width="24"
-                      xmlns="http://www.w3.org/2000/svg"
+                <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
+                  {project.technologies.map((technology, index) => (
+                    <motion.div
+                      key={index}
+                      whileHover={{ scale: 1.05, x: 5 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className='flex items-center gap-2 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-orange-500 transition-all group'
                     >
-                      <path
-                        fill="#FFFFFF"
-                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                      ></path>
-                    </svg>
-                    Github
+                      <div className='w-2 h-2 bg-orange-500 rounded-full group-hover:scale-150 transition-transform' />
+                      <span className='text-gray-300 text-sm font-medium'>
+                        {technology}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Action Buttons */}
+              <motion.div variants={itemVariants} className='space-y-3'>
+                <motion.a
+                  href={project.projectLinks}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className='w-full block'
+                >
+                  <button className='w-full flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-orange-500/50 group'>
+                    <FaEye className='group-hover:animate-pulse' />
+                    Ver Proyecto
                   </button>
-                </a>
-              </div>
-            </div>
-            <div className="flex flex-col flex-wrap lg:py-6 mb-10 lg:w-1/2 lg:pl-12 lg:text-left">
-              <div className="project-details__description p-10 text-2xl mb-10">
-                <h2 className="mb-4 text-white text-3xl">Description:</h2>
-                <div className="bg-orange-500 h-1 w-16 mb-6"></div>
-                {project.description}
-              </div>
-              <div className="project-details__improobe p-10 flex flex-col mb-10 lg:items-start items-center">
-                <h2 className="mb-4 mt-6 text-white text-3xl">
-                  What i improve:
-                </h2>
-                <div className="bg-orange-500 h-1 w-16 mb-6"></div>
-                {project.whatIImprube.map((text, index) => (
-                  <div key={index} className="mt-8">
-                    <div className="text-2xl mb-8">{text}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+                </motion.a>
+
+                <motion.a
+                  href={project.repoLink}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className='w-full block'
+                >
+                  <button className='w-full flex items-center justify-center gap-2 bg-gray-900 border border-gray-700 hover:border-orange-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 group'>
+                    <FaGithub className='group-hover:rotate-12 transition-transform' />
+                    Ver Código
+                  </button>
+                </motion.a>
+              </motion.div>
+            </motion.div>
           </div>
-        </section>
-      </div>
-      <CallToAction />
-      <Footer text="Copyright Michaelxk ©" year="2024" />
-    </>
+        </motion.div>
+      </section>
+
+      {/* CTA Section */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
+        <CallToAction />
+      </motion.section>
+
+      {/* Footer */}
+      <Footer text='Copyright Michaelxk ©' year='2024' />
+
+      {/* Global Styles */}
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg, #ff8c00, #ff6347);
+          border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(180deg, #ffa500, #ff7f50);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .text-3xl {
+            font-size: 1.875rem;
+          }
+
+          .text-2xl {
+            font-size: 1.5rem;
+          }
+
+          .text-lg {
+            font-size: 1.125rem;
+          }
+        }
+      `}</style>
+    </motion.div>
   );
 };
 

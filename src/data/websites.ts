@@ -8,6 +8,7 @@ import {
   jammusik,
   web10,
   web11,
+  afrodita,
 } from '@/assets/img/webs';
 import { Website, WebsiteConfig } from '@/types/website';
 
@@ -86,6 +87,12 @@ export const websites: readonly Website[] = [
     title: 'XK-Drums',
     cardImage: web11,
     projectLinks: 'https://agitated-chandrasekhar-78e608.netlify.app/',
+  }),
+  createWebsite({
+    id: 8,
+    title: 'Afrodita Beauty Store',
+    cardImage: afrodita,
+    projectLinks: 'https://afrodita-flame.vercel.app/',
   }),
 ];
 
