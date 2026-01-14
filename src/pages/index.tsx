@@ -41,6 +41,16 @@ export default function Home() {
       >
         <Menu />
         <div className='bg-home w-screen h-screen bg-slate-900 bg-opacity-0 flex flex-grow items-center pl-20'>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className='absolute top-0 left-0 w-full h-full object-cover -z-10'
+          >
+            <source src='/video-bg.mp4' type='video/mp4' />
+          </video>
+
           <div className='container-presentation'>
             <Presentation
               title1='Michael'
@@ -49,7 +59,6 @@ export default function Home() {
             />
           </div>
         </div>
-
         <AboutMeText />
       </main>
       <div className='lasted_websites' ref={textRef}>
@@ -81,7 +90,7 @@ export default function Home() {
           href={`/projects`}
           className='flex justify-center mt-20 pb-20 inline-block text-sm md:text-base lg:text-lg font-medium leading-loose text-indigo-200 hover:text-indigo-100'
         >
-          <h2 className='text-5xl font-bold mb-6'>
+          <h2 className='text-3xl font-bold mb-6'>
             Explore My Projects{' '}
             <span aria-hidden='true' className='ml-2'>
               →

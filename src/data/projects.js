@@ -7,6 +7,7 @@ import {
 	project6,
 	project7,
 	project8,
+	luxpuntacana
 } from "@/assets/img/projects";
 
 import {
@@ -15,7 +16,8 @@ import {
 	translator_project,
 	weather_project,
 	xk_project,
-	jammuisk
+	jammuisk,
+	luxpuntacanaDetails
 } from "@/assets/img/projects/project-details";
 
 export const projects = [
@@ -46,7 +48,7 @@ export const projects = [
 		appImage: translator_project,
 	},
 	{
-		id: 10,
+		id: 2,
 		category: "Apps",
 		title: "Jammusik",
 		title1: "Jammusik",
@@ -64,6 +66,10 @@ export const projects = [
 			"Framer motion",
 			"Ion icons",
 			"Firebase",
+			"Node.js",
+			"Express.js",
+			"Spotify SDK",
+			"Multiple APIs for lyrics, chords, etc.",
 		],
 		whatIImprube: [
 			"Clean code (DDD) implementation, DRY, KISS, and beautifull architecture with dependency injection and providers.",
@@ -71,7 +77,35 @@ export const projects = [
 		appImage: jammuisk,
 	},
 	{
-		id: 11,
+		id: 3,
+		category: "Apps",
+		title: "Lux Punta Cana",
+		title1: "Lux",
+		title2: "Punta Cana",
+		subtitle: "Manage and organize your playlists...",
+		description:
+			"Platform to book your luxury excutsions in Punta Cana, Yachts, Luxury transpors, Golf carts",
+		CardImage: luxpuntacana,
+		projectLinks: "https://luxpuntacana.com",
+		repoLink: "https://github.com/Michaellinaresxk/Plan",
+		repoProvider: "GitHub",
+		technologies: [
+			"Next.js",
+			"Framer motion",
+			"Lucide icons",
+			"Firebase",
+			"Node.js",
+			"Express.js",
+			"Mercury Payments SDK",
+			"Multiple APIs for lyrics, chords, etc.",
+		],
+		whatIImprube: [
+			"Clean code (DDD) implementation, Factory Pattern for to display services and Forms.",
+		],
+		appImage: luxpuntacanaDetails,
+	},
+	{
+		id: 4,
 		category: "Apps",
 		title: "XK-Web Community",
 		title1: "XK-Web",
@@ -96,7 +130,7 @@ export const projects = [
 		appImage: xk_project,
 	},
 	{
-		id: 2,
+		id: 5,
 		category: "Apps",
 		title: "Gosia Recipe",
 		title1: "Gosia",
@@ -125,7 +159,7 @@ export const projects = [
 	},
 
 	{
-		id: 4,
+		id: 6,
 		category: "Apps",
 		title: "Chat Room",
 		title1: "Chat",
@@ -153,7 +187,7 @@ export const projects = [
 	},
 
 	{
-		id: 5,
+		id: 7,
 		category: "Apps",
 		title: "Weather App",
 		title1: "Weather",

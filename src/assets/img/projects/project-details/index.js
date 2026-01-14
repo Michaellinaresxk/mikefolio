@@ -5,7 +5,7 @@ import weather_project from "./weather.png";
 import gosia_project from "./gosia.png";
 import xk_project from "./details.png";
 import jammuisk from "./jammusik.png";
-
+import luxpuntacanaDetails from "./luxpuntacana-details.png";
 export {
 	chat_project,
 	space_project,
@@ -13,5 +13,6 @@ export {
 	weather_project,
 	gosia_project,
 	xk_project,
-	jammuisk
+	jammuisk,
+	luxpuntacanaDetails,
 };
