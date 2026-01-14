@@ -318,3 +318,74 @@ a {
 .animate-slide-in-right {
   animation: slideInRight 1s ease-out forwards;
 }
+
+
+
+   {/* Global Mobile Optimizations */}
+
+        @media (max-width: 640px) {
+          .bg-home {
+            padding-left: 0;
+            width: 100%;
+            height: 100vh;
+          }
+
+          .container-presentation {
+            padding-left: 1rem;
+            padding-right: 1rem;
+          }
+
+          /* Hero Section Overlay */
+          main > div {
+            padding: 1rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+          }
+
+          h2 {
+            font-size: clamp(1.25rem, 4vw, 2.5rem);
+          }
+
+          .latest_websites {
+            padding: 0;
+          }
+
+          /* Smooth transitions on mobile */
+          * {
+            -webkit-tap-highlight-color: transparent;
+          }
+        }
+
+        /* Touch-friendly targets */
+        @media (hover: none) {
+          button, a {
+            min-height: 44px;
+            min-width: 44px;
+          }
+        }
+
+        /* Prevent zoom on input */
+        input, textarea, select {
+          font-size: 16px;
+        }
+
+        /* Smooth scrolling */
+        html {
+          scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+          }
+        }
+
+
+

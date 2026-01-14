@@ -37,10 +37,10 @@ export default function Home() {
   return (
     <>
       <main
-        className={` transition-all ease-in flex min-h-screen flex-col items-center justify-between ${inter.className}`}
+        className={`transition-all ease-in flex min-h-screen flex-col items-center justify-between overflow-x-hidden ${inter.className}`}
       >
         <Menu />
-        <div className='bg-home w-screen h-screen bg-slate-900 bg-opacity-0 flex flex-grow items-center pl-20'>
+        <div className='relative bg-home w-full h-screen bg-slate-900 bg-opacity-0 flex items-center pl-4 sm:pl-20'>
           <video
             autoPlay
             muted
