@@ -48,7 +48,10 @@ export default function Home() {
             playsInline
             className='absolute top-0 left-0 w-full h-full object-cover -z-10'
           >
-            <source src='/video-bg.mp4' type='video/mp4' />
+            <source
+              src='https://res.cloudinary.com/freelancer2222222222222222/video/upload/v1768397474/mike-folio/video-bg_mqooam.mp4'
+              type='video/mp4'
+            />
           </video>
 
           <div className='container-presentation'>
