@@ -13,7 +13,7 @@ import { useState, useMemo, useRef, useEffect } from 'react';
 import { FaFilter, FaTimes } from 'react-icons/fa';
 
 export default function Projects() {
-  const filterCategories = ['All', 'Apps', 'Websites', 'UI Designs'];
+  const filterCategories = ['All', 'Projects', 'Websites', 'UI Designs'];
   const [activeFilter, setActiveFilter] = useState('All');
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const filterRef = useRef();
