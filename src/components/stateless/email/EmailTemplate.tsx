@@ -1,5 +1,6 @@
 // src/components/stateless/email/EmailTemplate.tsx
 
+import { ContactFormData } from '@/lib/validation/contact.schema';
 import {
   Body,
   Container,
@@ -9,7 +10,6 @@ import {
   Preview,
   Text,
 } from '@react-email/components';
-import { ContactFormData } from '../../../../lib/validation/contact.schema';
 
 export const EmailTemplate = ({
   name,
