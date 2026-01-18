@@ -9,7 +9,7 @@ import {
 } from '@/lib/validation/contact.schema';
 
 const ContactForm = () => {
-  const [status, setStatus] = useState<FormStatus>('idle');
+  const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
   const {
