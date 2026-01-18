@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@react-email/components": "^1.0.4",
+    "@react-email/render": "^2.0.2",
     "@react-three/drei": "^9.109.4",
     "@react-three/fiber": "^8.16.6",
     "@react-three/postprocessing": "^2.16.2",
