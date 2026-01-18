@@ -35,7 +35,7 @@ export const EmailTemplate = ({
         <Text style={text}>
           <strong>Message:</strong>
         </Text>
-        <Text style={message}>{message}</Text>
+        <Text style={messageStyle}>{message}</Text>
       </Container>
     </Body>
   </Html>
@@ -65,11 +65,11 @@ const text = {
   margin: '10px 0',
 };
 
-const message = {
+// ✅ Cambiado: sin "as const" y renombrado para evitar conflicto
+const messageStyle = {
   color: '#6b7280',
   fontSize: '14px',
   lineHeight: '1.6',
-  whiteSpace: 'pre-wrap' as const,
   padding: '15px',
   backgroundColor: '#f9fafb',
   borderRadius: '8px',
