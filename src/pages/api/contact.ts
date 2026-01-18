@@ -1,9 +1,9 @@
 // src/pages/api/contact.ts
 
-import { contactFormSchema } from '@/lib/validation/contact.schema';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { contactFormSchema } from '@/lib/validation/contact.schema';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -15,13 +15,9 @@ export default async function handler(
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  console.log('🔵 API /api/contact llamada');
-
   try {
     const validatedData = contactFormSchema.parse(req.body);
-    console.log('✅ Datos validados:', validatedData);
 
-    console.log('📧 Enviando email...');
     const { data, error } = await resend.emails.send({
       from: process.env.EMAIL_FROM!,
       to: process.env.EMAIL_TO!,
@@ -61,7 +57,7 @@ export default async function handler(
           </div>
           
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: #9ca3af; font-size: 12px;">
-            <p>Sent from your Michaelxk Portfolio Contact Form</p>
+            <p>Sent from Michaelxk Portfolio</p>
           </div>
         </div>
       `,
@@ -83,7 +79,7 @@ export default async function handler(
     if (error instanceof z.ZodError) {
       return res.status(400).json({
         error: 'Invalid form data',
-        details: error.errors,
+        details: error.issues, // ← CAMBIADO: issues en lugar de errors
       });
     }
 
