@@ -9,9 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
-    "@react-email/components": "^1.0.4",
-    "@react-email/render": "^2.0.2",
     "@react-three/drei": "^9.109.4",
     "@react-three/fiber": "^8.16.6",
     "@react-three/postprocessing": "^2.16.2",
@@ -21,13 +18,10 @@
     "next": "14.2.6",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.71.1",
     "react-icons": "^5.0.1",
     "react-slick": "^0.30.2",
-    "resend": "^6.7.0",
     "slick-carousel": "^1.8.1",
-    "three": "^0.164.1",
-    "zod": "^4.3.5"
+    "three": "^0.164.1"
   },
   "devDependencies": {
     "@types/node": "^20",
