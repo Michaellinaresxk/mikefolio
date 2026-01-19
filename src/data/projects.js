@@ -101,7 +101,12 @@ export const projects = [
 			"Square Payments SDK",
 		],
 		whatIImprube: [
-			"Clean code (DDD) implementation, Factory Pattern for to display services and Forms. DRY, KISS, and beautifull architecture with dependency injection and providers.",
+			"Project for a tourism booking platform, I faced a significant architectural challenge. The platform needed to display various services—yacht rentals, ATV tours, horseback riding, island excursions—but each service had completely different data structures, forms, and properties. The challenge was maintaining clean architecture while handling this heterogeneity. A simple list-with-routing approach wouldn't work since each service required unique form fields, validation rules, and display components. My solution was implementing a component factory pattern with data-driven rendering:",
+			"1. Created a service registry mapping service types to their specific components.",
+			"2. Built a factory function that dynamically returns the appropriate component based on service metadata.",
+			"3. Standardized the interface between services using TypeScript interfaces, while allowing each to have unique properties.",
+			"4. Implemented form builders that construct validation schemas dynamically based on service configuration.",
+			"This approach kept the codebase maintainable—adding new services only required registering them in the factory without modifying existing code. It followed the Open/Closed principle and significantly reduced code duplication across service types.",
 		],
 		appImage: luxpuntacanaDetails,
 	},
@@ -140,7 +145,7 @@ export const projects = [
 		description:
 			"Search for recipes using natural language queries, such as 'gluten free brownies without sugar' or 'low fat vegan cupcakes.' You can automatically calculate the nutritional information for any recipe, visualize ingredient lists, etc..",
 		CardImage: project2,
-		projectLinks: "https://gosias-s-recipe.netlify.app/",
+		projectLinks: "https://deploy-preview-8--gosias-s-recipe.netlify.app/",
 		repoLink: "https://github.com/Michaellinaresxk/Gosias-s-Recipe",
 		repoProvider: "GitHub",
 		technologies: [
