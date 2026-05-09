@@ -15,6 +15,10 @@ export const contactFormSchema = z.object({
     .string()
     .min(10, 'Message must be at least 10 characters')
     .max(1000, 'Message is too long'),
+  // Honeypot: must be empty. Real users never see this field.
+  website: z.string().max(0),
+  // Cloudflare Turnstile token, verified server-side.
+  turnstileToken: z.string().min(1, 'Verification required'),
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@marsidev/react-turnstile": "^1.5.2",
     "@react-email/components": "^1.0.4",
     "@react-email/render": "^2.0.2",
     "@react-three/drei": "^9.109.4",

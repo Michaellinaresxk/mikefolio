@@ -1,27 +1,40 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile';
 import {
   ContactFormData,
   contactFormSchema,
 } from '@/lib/validation/contact.schema';
 
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
 const ContactForm = () => {
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
 
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
+    defaultValues: { website: '', turnstileToken: '' },
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    if (!turnstileToken) {
+      setStatus('error');
+      setErrorMessage('Please complete the verification.');
+      return;
+    }
+
     setStatus('loading');
     setErrorMessage('');
 
@@ -31,7 +44,7 @@ const ContactForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
       });
 
       const result = await response.json();
@@ -42,14 +55,17 @@ const ContactForm = () => {
 
       setStatus('success');
       reset();
+      setTurnstileToken('');
+      turnstileRef.current?.reset();
 
-      // Auto-hide success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
       setStatus('error');
       setErrorMessage(
         error instanceof Error ? error.message : 'Something went wrong',
       );
+      turnstileRef.current?.reset();
+      setTurnstileToken('');
     }
   };
 
@@ -59,6 +75,27 @@ const ContactForm = () => {
       <div className='bg-orange-500 h-1 w-16 mb-10'></div>
 
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
+        {/* Honeypot — hidden from real users; bots will fill it */}
+        <div
+          aria-hidden='true'
+          style={{
+            position: 'absolute',
+            left: '-10000px',
+            width: '1px',
+            height: '1px',
+            overflow: 'hidden',
+          }}
+        >
+          <label htmlFor='website'>Website (leave blank)</label>
+          <input
+            {...register('website')}
+            type='text'
+            id='website'
+            tabIndex={-1}
+            autoComplete='off'
+          />
+        </div>
+
         {/* Name Field */}
         <div>
           <label htmlFor='name' className='block text-sm font-medium mb-2'>
@@ -68,8 +105,8 @@ const ContactForm = () => {
             {...register('name')}
             type='text'
             id='name'
-            className='w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 
-                     focus:border-orange-500 focus:outline-none focus:ring-2 
+            className='w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20
+                     focus:border-orange-500 focus:outline-none focus:ring-2
                      focus:ring-orange-500/50 transition-all'
             placeholder='Your name'
           />
@@ -87,8 +124,8 @@ const ContactForm = () => {
             {...register('email')}
             type='email'
             id='email'
-            className='w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 
-                     focus:border-orange-500 focus:outline-none focus:ring-2 
+            className='w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20
+                     focus:border-orange-500 focus:outline-none focus:ring-2
                      focus:ring-orange-500/50 transition-all'
             placeholder='your@email.com'
           />
@@ -106,8 +143,8 @@ const ContactForm = () => {
             {...register('subject')}
             type='text'
             id='subject'
-            className='w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 
-                     focus:border-orange-500 focus:outline-none focus:ring-2 
+            className='w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20
+                     focus:border-orange-500 focus:outline-none focus:ring-2
                      focus:ring-orange-500/50 transition-all'
             placeholder="What's this about?"
           />
@@ -127,8 +164,8 @@ const ContactForm = () => {
             {...register('message')}
             id='message'
             rows={5}
-            className='w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 
-                     focus:border-orange-500 focus:outline-none focus:ring-2 
+            className='w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20
+                     focus:border-orange-500 focus:outline-none focus:ring-2
                      focus:ring-orange-500/50 transition-all resize-none'
             placeholder='Your message...'
           />
@@ -139,13 +176,34 @@ const ContactForm = () => {
           )}
         </div>
 
+        {/* Cloudflare Turnstile — invisible CAPTCHA */}
+        {TURNSTILE_SITE_KEY && (
+          <Turnstile
+            ref={turnstileRef}
+            siteKey={TURNSTILE_SITE_KEY}
+            onSuccess={(token) => {
+              setTurnstileToken(token);
+              setValue('turnstileToken', token);
+            }}
+            onExpire={() => {
+              setTurnstileToken('');
+              setValue('turnstileToken', '');
+            }}
+            onError={() => {
+              setTurnstileToken('');
+              setValue('turnstileToken', '');
+            }}
+            options={{ theme: 'dark' }}
+          />
+        )}
+
         {/* Submit Button */}
         <button
           type='submit'
-          disabled={isSubmitting}
-          className='w-full bg-orange-500 hover:bg-orange-600 disabled:bg-orange-500/50 
-                   disabled:cursor-not-allowed text-white font-semibold py-3 px-6 
-                   rounded-lg transition-all duration-200 transform 
+          disabled={isSubmitting || !turnstileToken}
+          className='w-full bg-orange-500 hover:bg-orange-600 disabled:bg-orange-500/50
+                   disabled:cursor-not-allowed text-white font-semibold py-3 px-6
+                   rounded-lg transition-all duration-200 transform
                    hover:scale-[1.02] active:scale-[0.98]'
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}
