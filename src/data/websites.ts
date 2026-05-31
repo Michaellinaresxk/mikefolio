@@ -9,6 +9,7 @@ import {
   web10,
   web11,
   afrodita,
+  sunset,
 } from '@/assets/img/webs';
 import { Website, WebsiteConfig } from '@/types/website';
 
@@ -32,6 +33,12 @@ const createWebsite = ({
  * All websites data
  */
 export const websites: readonly Website[] = [
+  createWebsite({
+    id: 9,
+    title: 'Sunset Beauty Store',
+    cardImage: sunset,
+    projectLinks: 'https://sunset.luxpuntacana.com/',
+  }),
   createWebsite({
     id: 1,
     title: 'PCYR',
@@ -89,7 +96,7 @@ export const websites: readonly Website[] = [
     projectLinks: 'https://agitated-chandrasekhar-78e608.netlify.app/',
   }),
   createWebsite({
-    id: 8,
+    id: 10,
     title: 'Afrodita Beauty Store',
     cardImage: afrodita,
     projectLinks: 'https://afrodita-flame.vercel.app/',

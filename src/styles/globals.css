@@ -2,23 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body{
   overflow-x: hidden;
 }
-/* 
-.bg-home{
-  background-image: url("../assets/img/space.png");
-  min-height: 100%;
-  width: 100%;
-  max-width: 100%;
-  background-size: cover;
-  background-position: center;
-  object-fit: fill;
-} */
 
 .bg-home {
   position: relative;
@@ -43,9 +29,7 @@ body{
   background-size:cover;
   background-repeat: no-repeat;
   background-position: center;
-
 }
-
 
 .bg-myJourney {
   @apply w-screen h-screen bg-[url('/src/assets/img/red-moon.jpg')] bg-cover bg-no-repeat;
@@ -55,7 +39,6 @@ body{
 .bg-myJourney .bg-myJourney-title {
   padding-top: 150px;
 }
-
 
 .about-space-ship {
   width: 300px;
@@ -67,8 +50,8 @@ body{
 }
 
 .quote-mark {
-  font-size: 3rem; /* Adjust the size as needed */
-  color: #f87315; /* Change to any color you like */
+  font-size: 3rem;
+  color: #f87315;
   vertical-align: top;
 }
 
@@ -87,8 +70,6 @@ body{
   @apply hover:text-orange-500 font-semibold
 }
 
-
-
 .bg-about-page {
   background-color: #000;
 }
@@ -102,7 +83,6 @@ body{
     height: 100vh;
     object-fit: cover;
     width: 100%;
-
     background-size: cover;
 }
 
@@ -125,7 +105,6 @@ body{
   width: 80%;
 }
 
-
 .service-card {
   background-color: #1b1b1b;
   border: 1px solid #2a2a2a;
@@ -146,7 +125,8 @@ body{
   align-items: center;
   cursor: pointer;
 }
-  :root {
+
+:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -189,7 +169,6 @@ a {
   rotate: 8deg;
 }
 
-
 .Btn {
   width: 45px;
   height: 45px;
@@ -199,13 +178,10 @@ a {
   border: none;
   background-color: transparent;
   position: relative;
-  /* overflow: hidden; */
   border-radius: 7px;
   cursor: pointer;
   transition: all 0.3s;
 }
-
-
 
 .svgContainer {
   width: 100%;
@@ -246,11 +222,6 @@ a {
 .BG_linkedin {
   background: #0077b5;
 }
-.BG_dribble {
-  background: #ea4c89;
-}
-
-
 
 .Btn:hover .BG {
   transform: rotate(35deg);
@@ -265,14 +236,15 @@ a {
 
 @keyframes scrolling {
   to {
-  transform: translate(calc(-50% - 0.5rem));
-   }
+    transform: translate(calc(-50% - 0.5rem));
   }
+}
 
+/* animation-timeline requires @supports guard — not supported on iOS Safari */
+@supports (animation-timeline: scroll()) {
   .scroller[data-animated="true"] .scroller__inner {
     width: max-content;
     flex-wrap: nowrap;
-    /* animation: scrolling Linear; */
     animation: scrolling linear;
     animation-timeline: scroll(root);
   }
@@ -280,6 +252,8 @@ a {
   .scroller[data-direction="right"] .scroller__inner {
     animation-direction: reverse;
   }
+}
+
 .footer,
 .project-details__technologies,
 .project-details__improobe,
@@ -287,7 +261,6 @@ a {
   background-color: #171717;
   border-radius: 20px;
 }
-
 
 @keyframes slideInLeft {
   0% {
@@ -319,73 +292,71 @@ a {
   animation: slideInRight 1s ease-out forwards;
 }
 
+/* Mobile horizontal scroll — hide scrollbar */
+.lasted_websites .md\:hidden div::-webkit-scrollbar {
+  display: none;
+}
 
+/* Global Mobile Optimizations */
 
-   {/* Global Mobile Optimizations */}
+@media (max-width: 640px) {
+  .bg-home {
+    padding-left: 0;
+    width: 100%;
+    height: 100vh;
+  }
 
-        @media (max-width: 640px) {
-          .bg-home {
-            padding-left: 0;
-            width: 100%;
-            height: 100vh;
-          }
+  .container-presentation {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 
-          .container-presentation {
-            padding-left: 1rem;
-            padding-right: 1rem;
-          }
+  main > div {
+    padding: 1rem;
+  }
+}
 
-          /* Hero Section Overlay */
-          main > div {
-            padding: 1rem;
-          }
-        }
+@media (max-width: 768px) {
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+  }
 
-        @media (max-width: 768px) {
-          h1 {
-            font-size: clamp(1.5rem, 5vw, 3rem);
-          }
+  h2 {
+    font-size: clamp(1.25rem, 4vw, 2.5rem);
+  }
 
-          h2 {
-            font-size: clamp(1.25rem, 4vw, 2.5rem);
-          }
+  .latest_websites {
+    padding: 0;
+  }
 
-          .latest_websites {
-            padding: 0;
-          }
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
 
-          /* Smooth transitions on mobile */
-          * {
-            -webkit-tap-highlight-color: transparent;
-          }
-        }
+/* Touch-friendly targets */
+@media (hover: none) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
 
-        /* Touch-friendly targets */
-        @media (hover: none) {
-          button, a {
-            min-height: 44px;
-            min-width: 44px;
-          }
-        }
+/* Prevent zoom on input */
+input, textarea, select {
+  font-size: 16px;
+}
 
-        /* Prevent zoom on input */
-        input, textarea, select {
-          font-size: 16px;
-        }
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
 
-        /* Smooth scrolling */
-        html {
-          scroll-behavior: smooth;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-            scroll-behavior: auto !important;
-          }
-        }
-
-
-
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

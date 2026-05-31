@@ -2,17 +2,9 @@
 import { useRef } from 'react';
 import { FaRocket, FaMobileAlt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { useTransform, useScroll } from 'framer-motion';
 
 const ServicesSection = () => {
   const targetRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const horizontalRef = useTransform(scrollYProgress, [0, 1], ['1%', '-95%']);
 
   const features = [
     {

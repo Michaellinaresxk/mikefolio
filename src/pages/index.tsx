@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Presentation from '@/components/stateless/Presentation';
 import Footer from '@/components/stateless/Footer';
@@ -19,7 +18,6 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const targetRef = useRef(null);
-  const textRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -31,7 +29,7 @@ export default function Home() {
   const fontSizeTransform = useTransform(
     scrollYProgress,
     [0, 0.5],
-    ['.5vw', '10vw']
+    ['1.5rem', '10vw'],
   );
 
   return (
@@ -64,34 +62,69 @@ export default function Home() {
         </div>
         <AboutMeText />
       </main>
-      <div className='lasted_websites' ref={textRef}>
-        <motion.h2
-          className='text-7xl font-bold text-center py-20'
-          style={{ fontSize: fontSizeTransform }}
-        >
-          Latest Web{' '}
-          <span className='font-normal text-orange-500'>Creations</span>
-        </motion.h2>
 
-        <section className='relative h-[270vh]'>
-          <div className='sticky top-0 flex h-screen items-center overflow-hidden'>
-            <motion.div className='flex gap-4' style={{ x: horizontalRef }}>
-              {websites.map((web) => (
-                <div key={web.id} className='p-4'>
-                  <WebCard
-                    title={web.title}
-                    imageUrl={web.CardImage}
-                    cardWidht='450px'
-                  />
-                </div>
-              ))}
-            </motion.div>
+      <div className='lasted_websites'>
+        {/* Mobile: static heading + CSS horizontal scroll */}
+        <div className='md:hidden'>
+          <h2 className='text-3xl font-bold text-center py-10 px-4'>
+            Latest Web{' '}
+            <span className='font-normal text-orange-500'>Creations</span>
+          </h2>
+          <div
+            className='flex overflow-x-auto gap-3 pb-6 px-4 snap-x snap-mandatory'
+            style={
+              {
+                scrollbarWidth: 'none',
+                WebkitOverflowScrolling: 'touch',
+              } as React.CSSProperties
+            }
+          >
+            {websites.map((web, i) => (
+              <div
+                key={`m-${web.id}-${i}`}
+                className='snap-center flex-shrink-0 w-[80vw]'
+              >
+                <WebCard
+                  title={web.title}
+                  imageUrl={web.CardImage}
+                  cardWidht='100%'
+                />
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+
+        {/* Desktop: scroll-driven horizontal carousel */}
+        <div className='hidden md:block'>
+          <motion.h2
+            className='text-7xl font-bold text-center py-20'
+            style={{ fontSize: fontSizeTransform }}
+          >
+            Latest Web{' '}
+            <span className='font-normal text-orange-500'>Creations</span>
+          </motion.h2>
+
+          <section className='relative h-[270vh]' ref={targetRef}>
+            <div className='sticky top-0 flex h-screen items-center overflow-hidden'>
+              <motion.div className='flex gap-4' style={{ x: horizontalRef }}>
+                {websites.map((web, i) => (
+                  <div key={`d-${web.id}-${i}`} className='p-4'>
+                    <WebCard
+                      title={web.title}
+                      imageUrl={web.CardImage}
+                      cardWidht='450px'
+                    />
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          </section>
+        </div>
+
         <ImageAnimation image={pcyr} />
         <Link
           href={`/projects`}
-          className='flex justify-center mt-20 pb-20 inline-block text-sm md:text-base lg:text-lg font-medium leading-loose text-indigo-200 hover:text-indigo-100'
+          className='flex justify-center mt-20 pb-20 text-sm md:text-base lg:text-lg font-medium leading-loose text-indigo-200 hover:text-indigo-100'
         >
           <h2 className='text-3xl font-bold mb-6'>
             Explore My Projects{' '}
