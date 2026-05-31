@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  overflow-x: hidden;
+body {
+  /* overflow-x: clip does NOT create a scroll container, so position:sticky
+     keeps working on iOS Safari. overflow-x: hidden breaks sticky on iOS. */
+  overflow-x: clip;
 }
 
 .bg-home {
