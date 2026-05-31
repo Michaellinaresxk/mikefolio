@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <>
       <main
-        className={`transition-all ease-in flex min-h-screen flex-col items-center justify-between overflow-x-hidden ${inter.className}`}
+        className={`transition-all ease-in flex min-h-screen flex-col items-center justify-between ${inter.className}`}
       >
         <Menu />
         <div className='relative bg-home w-full h-screen bg-slate-900 bg-opacity-0 flex items-center pl-4 sm:pl-20'>
@@ -64,62 +64,42 @@ export default function Home() {
       </main>
 
       <div className='lasted_websites'>
-        {/* Mobile: static heading + CSS horizontal scroll */}
-        <div className='md:hidden'>
-          <h2 className='text-3xl font-bold text-center py-10 px-4'>
-            Latest Web{' '}
-            <span className='font-normal text-orange-500'>Creations</span>
-          </h2>
+        <motion.h2
+          className='text-3xl md:text-7xl font-bold text-center py-10 md:py-20 px-4 md:px-0'
+          style={{ fontSize: fontSizeTransform }}
+        >
+          Latest Web{' '}
+          <span className='font-normal text-orange-500'>Creations</span>
+        </motion.h2>
+
+        {/* Scroll-driven horizontal carousel — same on mobile and desktop */}
+        <section className='relative h-[270vh]' ref={targetRef}>
           <div
-            className='flex overflow-x-auto gap-3 pb-6 px-4 snap-x snap-mandatory'
-            style={
-              {
-                scrollbarWidth: 'none',
-                WebkitOverflowScrolling: 'touch',
-              } as React.CSSProperties
-            }
+            className='sticky top-0 flex items-center overflow-hidden'
+            style={{
+              height: '100svh',
+              touchAction: 'pan-y',
+            }}
           >
-            {websites.map((web, i) => (
-              <div
-                key={`m-${web.id}-${i}`}
-                className='snap-center flex-shrink-0 w-[80vw]'
-              >
-                <WebCard
-                  title={web.title}
-                  imageUrl={web.CardImage}
-                  cardWidht='100%'
-                />
-              </div>
-            ))}
+            <motion.div
+              className='flex gap-3 md:gap-4'
+              style={{
+                x: horizontalRef,
+                willChange: 'transform',
+              }}
+            >
+              {websites.map((web, i) => (
+                <div key={`${web.id}-${i}`} className='p-2 md:p-4'>
+                  <WebCard
+                    title={web.title}
+                    imageUrl={web.CardImage}
+                    cardWidht='min(80vw, 450px)'
+                  />
+                </div>
+              ))}
+            </motion.div>
           </div>
-        </div>
-
-        {/* Desktop: scroll-driven horizontal carousel */}
-        <div className='hidden md:block'>
-          <motion.h2
-            className='text-7xl font-bold text-center py-20'
-            style={{ fontSize: fontSizeTransform }}
-          >
-            Latest Web{' '}
-            <span className='font-normal text-orange-500'>Creations</span>
-          </motion.h2>
-
-          <section className='relative h-[270vh]' ref={targetRef}>
-            <div className='sticky top-0 flex h-screen items-center overflow-hidden'>
-              <motion.div className='flex gap-4' style={{ x: horizontalRef }}>
-                {websites.map((web, i) => (
-                  <div key={`d-${web.id}-${i}`} className='p-4'>
-                    <WebCard
-                      title={web.title}
-                      imageUrl={web.CardImage}
-                      cardWidht='450px'
-                    />
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-          </section>
-        </div>
+        </section>
 
         <ImageAnimation image={pcyr} />
         <Link
