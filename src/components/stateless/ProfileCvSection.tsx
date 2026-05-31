@@ -16,7 +16,7 @@ export const ProfileCvSection = () => {
   return (
     <motion.div
       ref={cvRef}
-      className="flex flex-col items-center justify-center min-h-screen m-20"
+      className="flex flex-col items-center justify-center min-h-screen mx-4 my-10 sm:mx-8 sm:my-16 lg:m-20"
       style={{ y }}
     >
       <Image src={cv} alt="CV Preview" />

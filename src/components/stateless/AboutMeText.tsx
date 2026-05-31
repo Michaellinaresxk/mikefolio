@@ -16,8 +16,8 @@ export const AboutMeText = () => {
   }, [isInView, mainControls]);
   return (
     <>
-      <main className="h-screen flex bg-aboutme-container justify-center items-center flex-col">
-        <div className="flex items-center pl-20">
+      <main className="min-h-screen flex bg-aboutme-container justify-center items-center flex-col py-16 lg:py-0">
+        <div className="flex items-center px-4 sm:px-8 lg:pl-20 lg:pr-8 w-full">
           <motion.section
             className="w-full lg:w-7/12"
             ref={containerRef}
@@ -32,17 +32,17 @@ export const AboutMeText = () => {
             }}
             transition={{ delay: 0.5 }}
           >
-            <motion.h2 className="text-3xl font-bold tracking-wide text-white lg:text-6xl mb-4">
+            <motion.h2 className="text-2xl sm:text-3xl font-bold tracking-wide text-white lg:text-6xl mb-4">
               I am,
             </motion.h2>
-            <motion.p className="text-xl lg:text-5xl text-white">
+            <motion.p className="text-lg sm:text-xl lg:text-5xl text-white">
               Frontend Developer, I specialize in crafting visually stunning{" "}
               <span className="text-orange-500">
                 and interactive digital experiences.{""}
               </span>
             </motion.p>
 
-            <p className="mt-10 text-xl lg:text-3xl text-white text-right">
+            <p className="mt-8 text-base sm:text-xl lg:text-3xl text-white text-right">
               Let&apos;s create something amazing{" "}
               <span className="text-orange-500">together.</span>
             </p>
