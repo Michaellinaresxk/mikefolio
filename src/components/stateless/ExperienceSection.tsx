@@ -13,14 +13,20 @@ interface Experience {
 const EXPERIENCES: Experience[] = [
   {
     title: 'Frontend Developer',
-    company: 'EFS Innovation',
-    period: 'October 2022 - June 2025',
+    company: 'MONTREAL',
+    period: 'Feb 2024 – Apr 2026',
     location: 'Remote',
   },
   {
-    title: 'Web Designer',
-    company: 'PCYR Punta Cana Yacht Rentals',
-    period: 'January 2018 - March 2022',
+    title: 'Full Stack Developer',
+    company: 'EFS-INNOVATION',
+    period: 'Oct 2022 – Jan 2024',
+    location: 'Remote',
+  },
+  {
+    title: 'Freelance Frontend Developer',
+    company: 'PCYR Tech Solutions',
+    period: 'Jan 2019 – Jan 2022',
     location: 'Hybrid',
   },
   // Agrega más experiencias aquí
