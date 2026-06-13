@@ -69,12 +69,8 @@ const About = () => {
                 />
                 <motion.h1
                   ref={titleRef}
-                  style={{ scale }}
                   className='relative z-10 leading-none font-extrabold tracking-tight'
-                  style={{
-                    scale,
-                    fontSize: 'clamp(3rem, 12vw, 10rem)',
-                  }}
+                  style={{ scale, fontSize: 'clamp(3rem, 12vw, 10rem)' }}
                 >
                   Hello, I&apos;m{' '}
                   <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'>
