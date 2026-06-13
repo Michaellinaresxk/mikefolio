@@ -3,138 +3,169 @@ import Footer from '@/components/stateless/Footer';
 import { ProfileCvSection } from '@/components/stateless/ProfileCvSection';
 import { ExperienceSection } from '@/components/stateless/ExperienceSection';
 import { WhatIUse } from '@/components/stateless/WhatIUse';
-import { motion, useTransform, useScroll } from 'framer-motion';
-import { about_background_image } from '@/assets/img/index';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import Image from 'next/image';
 import Menu from '@/components/stateless/menu/Menu';
 import Link from 'next/link';
 import PageHead from '@/components/PageHead';
 
 const About = () => {
-  const titleRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: titleRef,
-    offset: ['end start', 'start end'],
-  });
-
-  /*
-    FIX #15 — scale empieza en 0.8 en vez de 0.5.
-    Con 0.5 el título "Hello, I'm Michael" en mobile arrancaba
-    como texto ilegible de ~1.5rem. Con 0.8 luce intencional.
-  */
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-
   return (
     <>
-      {/* FIX #1 — SEO */}
       <PageHead
         title='About'
         description='Learn more about Michael Linares, his journey as a Frontend Developer and the technologies he works with.'
         path='/about'
       />
 
-      {/*
-        FIX #3 — Estructura HTML válida.
-        El original tenía <section> → <section> → <main> → <main> anidados.
-        Ahora: una sola <div> wrapper, un <main> para el contenido principal.
-        El <Menu /> va fuera del flujo semántico (es nav global).
-      */}
-      <div className='bg-about-page'>
+      <div className='bg-black'>
         <Menu />
 
-        {/* Hero image */}
-        <div className='relative w-full'>
-          <Image
-            alt='Michael Linares — About page hero'
-            className='object-cover object-center w-full'
-            src={about_background_image}
-            priority
+        {/* ── Hero ── */}
+        <section className='relative min-h-screen flex flex-col justify-center px-5 sm:px-8 pt-24 pb-20 overflow-hidden'>
+          {/* Ambient glow */}
+          <div
+            className='absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none'
+            style={{
+              background:
+                'radial-gradient(circle, rgba(249,115,22,0.07) 0%, transparent 65%)',
+            }}
+            aria-hidden='true'
           />
-        </div>
 
-        <main className='about-banner min-h-screen flex flex-col'>
-          {/* Intro title block */}
-          <div className='relative bg-dark-blue text-white font-sans'>
-            <div className='container mx-auto px-6 py-20 text-center'>
-              <p className='uppercase tracking-wide text-sm md:text-base lg:text-lg text-gray-300'>
-                Innovating User Experiences with Every Line of Code
+          <div className='relative z-10 max-w-5xl mx-auto w-full'>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className='text-xs font-semibold tracking-[0.3em] uppercase text-orange-500/70 mb-6'
+            >
+              About me
+            </motion.p>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className='font-bold text-white leading-[0.95] tracking-tight mb-10'
+              style={{ fontSize: 'clamp(3rem, 11vw, 9rem)' }}
+            >
+              Hello, <br className='sm:hidden' />
+              I&apos;m{' '}
+              <span className='text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300'>
+                Michael
+              </span>
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.12 }}
+              className='max-w-2xl space-y-5'
+            >
+              <p className='text-white/60 text-base sm:text-lg leading-relaxed'>
+                Frontend Developer with{' '}
+                <span className='text-white/90'>6+ years</span> building
+                production-ready applications in React, Vue, and TypeScript. Web
+                design background translates into sharper UX decisions and
+                closer collaboration with designers.
               </p>
+              <p className='text-white/40 text-sm sm:text-base leading-relaxed'>
+                Currently focused on web performance — Core Web Vitals, bundle
+                optimization, and rendering strategies that move the needle on
+                real-user metrics.
+              </p>
+            </motion.div>
 
-              <div className='flex justify-center items-center mt-6 relative'>
-                <div
-                  className='absolute z-0 w-48 h-48 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-50 pointer-events-none'
-                  aria-hidden='true'
-                />
-                <motion.h1
-                  ref={titleRef}
-                  className='relative z-10 leading-none font-extrabold tracking-tight'
-                  style={{ scale, fontSize: 'clamp(3rem, 12vw, 10rem)' }}
-                >
-                  Hello, I&apos;m{' '}
-                  <span className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500'>
-                    Michael
-                  </span>
-                </motion.h1>
-              </div>
-
-              <div className='mt-8 md:mt-12'>
-                <Link
-                  href='/projects'
-                  className='inline-block text-sm md:text-base font-medium text-indigo-200 hover:text-indigo-100 transition-colors'
-                >
-                  Latest Project <span aria-hidden='true'>→</span>
-                </Link>
-              </div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className='mt-10 flex items-center gap-6'
+            >
+              <Link
+                href='/projects'
+                className='inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold text-sm transition-colors'
+              >
+                See my work
+                <span aria-hidden='true'>→</span>
+              </Link>
+              <Link
+                href='/contact'
+                className='text-sm font-semibold text-white/50 hover:text-white/80 transition-colors'
+              >
+                Get in touch
+              </Link>
+            </motion.div>
           </div>
+        </section>
 
-          {/*
-            FIX #3 — Era <main> anidado. Ahora es <section>.
-            FIX: h-screen en mobile con texto lg:text-5xl causaba overflow.
-            Reemplazado por padding generoso.
-          */}
-          <section className='myJourney-bg flex justify-center items-center flex-col py-20 lg:py-0 lg:min-h-screen'>
-            <div className='flex flex-col lg:flex-row items-start lg:items-center lg:pl-20 px-6 max-w-4xl w-full'>
-              <div className='w-full text-left'>
-                <h2
-                  className='font-bold tracking-wide text-white mb-4'
-                  style={{ fontSize: 'clamp(1.75rem, 5vw, 3.5rem)' }}
-                >
-                  My journey,
-                </h2>
-                <p
-                  className='text-white leading-snug'
-                  style={{ fontSize: 'clamp(1.1rem, 3.5vw, 3rem)' }}
-                >
-                  as a developer started when I noticed that I can bring my{' '}
-                  <span className='text-orange-500'>ideas to life</span> and
-                  develop my knowledge in the same process.
-                </p>
-                <p
-                  className='mt-8 text-white text-right'
-                  style={{ fontSize: 'clamp(1rem, 2.5vw, 1.75rem)' }}
-                >
-                  I&apos;m naturally curious and perpetually expanding{' '}
-                  <span className='text-orange-500'>my knowledge.</span>
-                </p>
-              </div>
-            </div>
-          </section>
+        {/* ── Journey ── */}
+        <section className='px-5 sm:px-8 py-20 sm:py-28 border-t border-white/[0.06]'>
+          <div className='max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center'>
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <p className='text-xs font-semibold tracking-[0.3em] uppercase text-orange-500/70 mb-4'>
+                My story
+              </p>
+              <h2
+                className='font-bold text-white mb-6'
+                style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
+              >
+                My journey
+              </h2>
+              <p className='text-white/55 text-sm sm:text-base leading-relaxed mb-4'>
+                It started when I realized I could bring my{' '}
+                <span className='text-white/80'>ideas to life</span> and grow my
+                skills in the same process. That feeling never left.
+              </p>
+              <p className='text-white/35 text-sm sm:text-base leading-relaxed'>
+                I&apos;m naturally curious and perpetually expanding my
+                knowledge — from advanced frontend architecture to AI
+                integrations and mobile apps in production.
+              </p>
+            </motion.div>
 
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, x: 16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.08 }}
+              className='grid grid-cols-2 gap-px bg-white/[0.06] rounded-2xl overflow-hidden border border-white/[0.06]'
+            >
+              {[
+                { value: '6+', label: 'Years experience' },
+                { value: '30+', label: 'Projects delivered' },
+                { value: '11K+', label: 'Udemy students' },
+                { value: '3', label: 'Countries worked in' },
+              ].map((s) => (
+                <div key={s.label} className='bg-black px-6 py-8 text-center'>
+                  <p className='text-2xl sm:text-3xl font-bold text-orange-400 mb-1'>
+                    {s.value}
+                  </p>
+                  <p className='text-xs text-white/30 uppercase tracking-wider'>
+                    {s.label}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        <main>
           <ExperienceSection />
-          <ProfileCvSection />
-
-          <div className='mt-20'>
-            <CallToAction />
-          </div>
-
           <WhatIUse />
+          <ProfileCvSection />
+          <CallToAction />
         </main>
       </div>
 
-      <Footer text='Copyright Michaelxk ©' year={2024} />
+      <Footer text='Copyright Michaelxk ©' year={2026} />
     </>
   );
 };
