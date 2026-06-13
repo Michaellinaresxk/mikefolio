@@ -4,10 +4,6 @@
 
 /* ─── BASE ──────────────────────────────────────────────── */
 
-/*
-  overflow-x: clip does NOT create a scroll container, so position:sticky
-  keeps working on iOS Safari. overflow-x: hidden breaks sticky on iOS.
-*/
 body {
   overflow-x: clip;
 }
@@ -16,14 +12,12 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Prevent zoom on input focus (iOS Safari zooms when font-size < 16px) */
 input,
 textarea,
 select {
   font-size: 16px;
 }
 
-/* Touch feedback reset — avoids the blue flash on tappable elements */
 * {
   -webkit-tap-highlight-color: transparent;
 }
@@ -77,28 +71,20 @@ a {
 /* ─── HERO ───────────────────────────────────────────────── */
 
 /*
-  .bg-home is used as the hero wrapper.
-  - overflow: hidden clips the video + glow on mobile so nothing bleeds.
-  - min-height uses svh (small viewport height) so the unit accounts for the
-    mobile browser chrome. Falls back to 100vh for older browsers.
+  clip-path: inset(0) recorta igual que overflow:hidden pero sin crear
+  un stacking context que enterra el video en Safari/iOS.
+  El z-index del video lo maneja el JSX (z-0 / z-[1] / z-[2]).
 */
 .bg-home {
   position: relative;
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;
-  overflow: hidden;
+  background-color: #0c0f17;
+  clip-path: inset(0);
 }
 
-.bg-home video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
+/* ELIMINADO: .bg-home video { z-index: -1 } — peleaba con z-0 del JSX */
 
 /* ─── MENU ───────────────────────────────────────────────── */
 
@@ -217,8 +203,6 @@ a {
 }
 
 @media (hover: hover) {
-  /* Only apply tilt on devices that can actually hover — avoids stuck-tilt
-     bug on touch screens */
   .project-card__body:hover {
     rotate: 8deg;
   }
@@ -251,7 +235,6 @@ a {
   }
 }
 
-/* animation-timeline requires @supports guard — not supported on iOS Safari */
 @supports (animation-timeline: scroll()) {
   .scroller[data-animated='true'] .scroller__inner {
     width: max-content;
@@ -259,7 +242,6 @@ a {
     animation: scrolling linear;
     animation-timeline: scroll(root);
   }
-
   .scroller[data-direction='right'] .scroller__inner {
     animation-direction: reverse;
   }
@@ -298,7 +280,6 @@ a {
 
 /* ─── ACCESSIBILITY ──────────────────────────────────────── */
 
-/* Touch-friendly tap targets (WCAG 2.5.5) */
 @media (hover: none) {
   button,
   a {
@@ -307,7 +288,6 @@ a {
   }
 }
 
-/* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -3,16 +3,10 @@ import { motion, useCycle, AnimatePresence } from 'framer-motion';
 import MenuToggle from './MenuToggle';
 import Navigation from './Navigation';
 
-/**
- * Panel slide-in desde la derecha — sin clip-path visible en closed state.
- * El backdrop solo existe en el DOM cuando isOpen = true (AnimatePresence),
- * por lo que nunca hay nada oscuro visible mientras el menú está cerrado.
- */
 const Menu = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useRef(null);
 
-  // Lock body scroll on iOS when menu is open
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => {
@@ -20,7 +14,6 @@ const Menu = () => {
     };
   }, [isOpen]);
 
-  // Close on Escape
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape' && isOpen) toggleOpen();
@@ -31,9 +24,9 @@ const Menu = () => {
 
   return (
     <>
-      {/* Toggle button — always visible, fully transparent background */}
+      {/* Toggle — siempre por encima de todo */}
       <motion.div
-        className='fixed top-4 right-4 z-50'
+        className='fixed top-4 right-4 z-[10001]'
         initial={false}
         animate={isOpen ? 'open' : 'closed'}
         ref={containerRef}
@@ -41,14 +34,13 @@ const Menu = () => {
         <MenuToggle toggle={() => toggleOpen()} />
       </motion.div>
 
-      {/* Menu panel — only mounted when open, so nothing leaks visually */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Tap-outside overlay */}
+            {/* Overlay tap-outside */}
             <motion.div
               key='overlay'
-              className='fixed inset-0 z-40 bg-black/50'
+              className='fixed inset-0 z-[9999] bg-black/50'
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -57,14 +49,14 @@ const Menu = () => {
               aria-hidden='true'
             />
 
-            {/* Slide-in panel from right */}
+            {/* Panel — tween en vez de spring para que el exit sea limpio sin rebound */}
             <motion.nav
               key='panel'
-              className='fixed top-0 right-0 z-40 h-full w-full sm:w-[300px] bg-gray-950/95 backdrop-blur-md shadow-2xl'
-              initial={{ x: '100%' }}
+              className='fixed top-0 right-0 z-[10000] h-full w-full sm:w-[300px] bg-gray-950/95 backdrop-blur-md shadow-2xl'
+              initial={{ x: '110%' }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+              exit={{ x: '110%' }}
+              transition={{ type: 'tween', duration: 0.25, ease: 'easeInOut' }}
               aria-label='Main navigation'
             >
               <Navigation onClose={() => toggleOpen()} />

@@ -13,149 +13,98 @@ const ProjectCard = ({
   repoProvider,
   description,
 }) => {
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-    hover: {
-      y: -8,
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  const imageVariants = {
-    initial: { scale: 1 },
-    hover: {
-      scale: 1.05,
-      transition: {
-        duration: 0.4,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  const buttonVariants = {
-    hidden: { opacity: 0, x: -10 },
-    visible: (index) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: index * 0.1,
-        duration: 0.4,
-      },
-    }),
-  };
-
   return (
-    <motion.div
-      variants={cardVariants}
-      initial='hidden'
-      whileInView='visible'
-      whileHover='hover'
-      viewport={{ once: true, margin: '-50px' }}
-      className='group h-full'
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.45, ease: 'easeOut' }}
+      className='group relative flex flex-col h-full'
     >
-      <div className='relative h-full rounded-xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-orange-500/50 transition-all duration-300 shadow-lg hover:shadow-orange-500/20 flex flex-col'>
-        {/* Image Container */}
-        <motion.div
-          variants={imageVariants}
-          initial='initial'
-          whileHover='hover'
-          className='relative overflow-hidden h-48 sm:h-56 w-full bg-gray-800'
+      {/* Card shell */}
+      <div className='relative flex flex-col h-full rounded-2xl overflow-hidden bg-[#0f1117] border border-white/[0.06] transition-all duration-500 group-hover:border-white/[0.14]'>
+        {/* ── Image ── */}
+        <Link
+          href={`/projectDetails?id=${id}`}
+          className='block relative overflow-hidden aspect-[16/9] bg-[#0a0c12]'
         >
-          <Link href={`/projectDetails?id=${id}`}>
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className='object-cover w-full h-full'
-              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-            />
-            {/* Overlay Gradient on Hover */}
-            <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-          </Link>
-        </motion.div>
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className='object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]'
+            sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+          />
+          {/* Dark scrim that lifts on hover */}
+          <div className='absolute inset-0 bg-black/40 transition-opacity duration-500 group-hover:opacity-20' />
 
-        {/* Content Container */}
-        <div className='flex flex-col flex-grow px-6 py-5'>
+          {/* Orange slash accent — bottom-left corner */}
+          <div className='absolute bottom-0 left-0 w-10 h-[2px] bg-orange-500 transition-all duration-500 group-hover:w-full origin-left' />
+        </Link>
+
+        {/* ── Body ── */}
+        <div className='flex flex-col flex-grow px-5 py-5 gap-4'>
           {/* Title */}
           <Link href={`/projectDetails?id=${id}`}>
-            <motion.h3
-              className='text-xl sm:text-2xl font-bold text-white mb-3 line-clamp-2 hover:text-orange-500 transition-colors duration-300 cursor-pointer'
-              whileHover={{ x: 4 }}
-            >
+            <h3 className='text-base sm:text-lg font-bold text-white/90 leading-snug tracking-tight line-clamp-2 transition-colors duration-200 group-hover:text-orange-400'>
               {title}
-            </motion.h3>
+            </h3>
           </Link>
 
-          {/* Description (if provided) */}
+          {/* Description */}
           {description && (
-            <p className='text-gray-400 text-sm mb-4 line-clamp-2 flex-grow'>
-              {description.length > 80
-                ? `${description.substring(0, 80)}...`
-                : description}
+            <p className='text-white/40 text-xs sm:text-sm leading-relaxed line-clamp-2 flex-grow'>
+              {description}
             </p>
           )}
 
-          {/* Action Buttons */}
-          <div className='flex gap-3 mt-auto'>
-            <motion.div
-              custom={0}
-              variants={buttonVariants}
-              initial='hidden'
-              whileInView='visible'
+          {/* ── Actions ── */}
+          <div className='flex items-center gap-2 mt-auto pt-1'>
+            {/* Code button — ghost */}
+            <Link
+              href={repo_link}
+              target='_blank'
+              rel='noopener noreferrer'
               className='flex-1'
             >
-              <Link href={repo_link} target='_blank' rel='noopener noreferrer'>
-                <motion.button
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: 'rgb(249, 115, 22)',
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className='w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gray-800 text-white font-semibold text-sm transition-all duration-300 border border-gray-700 hover:border-orange-500 group/btn'
-                >
-                  <FaGithub className='group-hover/btn:rotate-12 transition-transform' />
-                  <span className='hidden sm:inline'>{repoProvider}</span>
-                  <span className='sm:hidden'>Code</span>
-                </motion.button>
-              </Link>
-            </motion.div>
+              <motion.span
+                whileTap={{ scale: 0.95 }}
+                className='flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg text-xs font-semibold text-white/50 border border-white/[0.08] hover:border-white/20 hover:text-white/80 transition-all duration-200'
+              >
+                <FaGithub size={13} />
+                <span className='hidden sm:inline'>
+                  {repoProvider ?? 'Code'}
+                </span>
+                <span className='sm:hidden'>Code</span>
+              </motion.span>
+            </Link>
 
-            <motion.div
-              custom={1}
-              variants={buttonVariants}
-              initial='hidden'
-              whileInView='visible'
+            {/* Live button — orange solid */}
+            <Link
+              href={app_link}
+              target='_blank'
+              rel='noopener noreferrer'
               className='flex-1'
             >
-              <Link href={app_link} target='_blank' rel='noopener noreferrer'>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className='w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/50 group/btn'
-                >
-                  <FaEye className='group-hover/btn:animate-pulse' />
-                  <span>View</span>
-                </motion.button>
-              </Link>
-            </motion.div>
+              <motion.span
+                whileTap={{ scale: 0.95 }}
+                className='flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg text-xs font-bold text-white bg-orange-500 hover:bg-orange-400 transition-colors duration-200'
+              >
+                <FaEye size={12} />
+                Live
+              </motion.span>
+            </Link>
           </div>
         </div>
-
-        {/* Border Accent */}
-        <div className='absolute top-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-500 to-red-600 group-hover:w-full transition-all duration-500' />
       </div>
-    </motion.div>
+
+      {/* Glow — only visible on hover, doesn't affect layout */}
+      <div
+        className='pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500'
+        style={{ boxShadow: '0 0 32px 0 rgba(249,115,22,0.10)' }}
+        aria-hidden='true'
+      />
+    </motion.article>
   );
 };
 

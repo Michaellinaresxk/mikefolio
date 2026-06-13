@@ -191,7 +191,7 @@ export default function Projects() {
             initial='hidden'
             animate='show'
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
-            className='relative z-10 grid gap-3 sm:gap-5 md:gap-6 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-2 pb-24'
+            className='relative z-10 grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-2 pb-24'
             aria-label='Projects list'
           >
             {allFilteredItems.length > 0 ? (

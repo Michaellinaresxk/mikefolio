@@ -36,7 +36,6 @@ export default function Home() {
 
   return (
     <>
-      {/* FIX #1 — SEO + OG meta para WhatsApp/LinkedIn/iMessage */}
       <PageHead
         title='Home'
         description='Portfolio of Michael Linares, Frontend Developer & Web Designer specializing in React, Next.js and interactive digital experiences.'
@@ -44,14 +43,12 @@ export default function Home() {
         includeStructuredData
       />
 
-      <main
-        className={`flex min-h-screen flex-col items-center justify-between ${inter.className}`}
-      >
+      <main className={`flex min-h-screen flex-col ${inter.className}`}>
         <Menu />
 
         {/* ── HERO ── */}
         <div
-          className='relative bg-home w-full flex items-center overflow-hidden'
+          className='relative w-full flex items-center bg-home'
           style={{
             height: '100svh',
             paddingLeft: 'max(1.5rem, env(safe-area-inset-left))',
@@ -60,18 +57,14 @@ export default function Home() {
             paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))',
           }}
         >
-          {/*
-            FIX #5 — Video solo en desktop. En mobile usamos la imagen
-            poster como fondo estático: ahorra ~2-5 MB de datos y elimina
-            el retraso de carga en conexiones lentas.
-          */}
+          {/* video: z-0 base */}
           <video
             autoPlay
             muted
             loop
             playsInline
-            poster='/og-image.jpg'
-            className='absolute inset-0 w-full h-full object-cover -z-10 hidden sm:block'
+            poster='/og-image-v2.jpg'
+            className='absolute inset-0 w-full h-full object-cover z-0'
             aria-hidden='true'
           >
             <source
@@ -80,20 +73,14 @@ export default function Home() {
             />
           </video>
 
-          {/* Mobile: imagen estática del poster como fondo */}
+          {/* scrim: z-[1] encima del video */}
           <div
-            className='absolute inset-0 -z-10 sm:hidden bg-cover bg-center'
-            style={{ backgroundImage: "url('/og-image.jpg')" }}
+            className='absolute inset-0 z-[1] bg-black/45'
             aria-hidden='true'
           />
 
-          {/* Scrim para legibilidad */}
-          <div
-            className='absolute inset-0 -z-10 bg-black/45'
-            aria-hidden='true'
-          />
-
-          <div className='w-full max-w-2xl sm:pl-10 lg:pl-16'>
+          {/* contenido: z-[2] siempre visible */}
+          <div className='relative z-[2] w-full max-w-2xl sm:pl-10 lg:pl-16'>
             <Presentation
               title1='Michael'
               title2='Linares'
