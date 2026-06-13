@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 import { useRef } from 'react';
 import { motion, useTransform, useScroll } from 'framer-motion';
-import PageHead from '@/components/stateless/PageHead';
+import PageHead from '@/components/PageHead';
 import Presentation from '@/components/stateless/Presentation';
 import Footer from '@/components/stateless/Footer';
 import CallToAction from '@/components/stateless/CallToAction';
