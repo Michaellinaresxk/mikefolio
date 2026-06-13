@@ -2,10 +2,18 @@ import ContactForm from '@/components/stateless/ContactForm';
 import Menu from '@/components/stateless/menu/Menu';
 import SocialMedia from '@/components/stateless/SocialMedia';
 import Heading from '@/components/stateless/Heading';
-
 import Footer from '@/components/stateless/Footer';
+import PageHead from '@/components/PageHead';
+import Link from 'next/link';
 
-const stats = [
+/**
+ * FIX #10 — Links centralizados.
+ * Los perfiles de redes adicionales (Instagram, GitLab, Udemy)
+ * que no están en SocialMedia.jsx se definen aquí localmente.
+ * Si necesitas que estén también en otro componente, muévelos
+ * a /data/social-links.ts.
+ */
+const additionalLinks = [
   { name: 'Instagram UI', href: 'https://www.instagram.com/michaelxk.ui/' },
   { name: 'Instagram XK', href: 'https://www.instagram.com/xkweb' },
   { name: 'Gitlab', href: 'https://gitlab.com/Michaelxk' },
@@ -15,72 +23,92 @@ const stats = [
 const Contact = () => {
   return (
     <>
+      {/* FIX #1 — SEO */}
+      <PageHead
+        title='Contact'
+        description="Get in touch with Michael Linares. Let's discuss your next web project."
+        path='/contact'
+      />
+
       <Menu />
-      <div className='relative isolate overflow-hidden bg-orange py-24 sm:py-32 bg-contact'>
-        {/* <img
-          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
-          alt=""
-          className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center"
-        /> */}
-        <div
-          className='hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl'
-          aria-hidden='true'
-        >
-          <div
-            className='aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20'
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            }}
-          />
-        </div>
-        <div
-          className='absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu'
-          aria-hidden='true'
-        >
-          <div
-            className='aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20'
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            }}
-          />
-        </div>
-        <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-          <Heading title1='How to reach' title2='me?' />
 
-          <div className='mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none'>
-            <h2 className='mt-40 mb-5 text-3xl font-bold  sm:text-4xl'>
-              Social Media
-            </h2>
-
-            <div className='bg-orange-500 h-1 w-16 mb-10'></div>
-            <SocialMedia size={30} />
-            <div className='text-2xl mb-10 mt-6'>
-              Whether you&apos;re looking to discuss the latest trends, decode
-              the mysteries of responsive design, or even fancy sponsoring a
-              digital coffee to fuel the next innovation, I&apos;m just a click
-              away. Connect with me via the social links below.
-            </div>
-            <h2 className='mt-20 mb-5 text-3xl font-bold  sm:text-4xl'>
-              Links
-            </h2>
-            <div className='bg-orange-500 h-1 w-16 mb-10'></div>
-            <dl className='mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-5'>
-              {stats.map((link) => (
-                <a key={link.name} href={link.href} target='_blank'>
-                  <h2 className='text-2xl font-bold leading-9 tracking-tight text-white'>
-                    {link.name} <span aria-hidden='true'>&rarr;</span>
-                  </h2>
-                </a>
-              ))}
-            </dl>
+      {/*
+        FIX #4 — El mt-40 original (160px) dejaba un espacio enorme
+        en mobile antes del contenido. Reemplazado por pt-24 sm:pt-32
+        para compensar el menu fijo sin desperdiciar espacio.
+      */}
+      <div className='relative isolate overflow-hidden bg-black text-white pt-24 sm:pt-32 pb-20'>
+        {/* Decorative blobs — solo en sm+ para no ralentizar mobile */}
+        <div className='hidden sm:block' aria-hidden='true'>
+          <div className='absolute -top-10 right-1/2 -z-10 mr-10 transform-gpu blur-3xl'>
+            <div
+              className='aspect-[1097/845] w-[40rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20'
+              style={{
+                clipPath:
+                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+              }}
+            />
           </div>
         </div>
-        <ContactForm />
+
+        <div className='mx-auto max-w-4xl px-6 lg:px-8'>
+          <Heading title1='How to reach' title2='me?' />
+
+          <div className='mt-16 space-y-16'>
+            {/* Social Media */}
+            <section aria-labelledby='social-heading'>
+              <h2
+                id='social-heading'
+                className='text-2xl sm:text-3xl font-bold mb-3'
+              >
+                Social Media
+              </h2>
+              <div className='bg-orange-500 h-1 w-12 mb-8' aria-hidden='true' />
+              <SocialMedia />
+              <p className='text-lg sm:text-xl mt-6 text-white/80 leading-relaxed max-w-2xl'>
+                Whether you&apos;re looking to discuss the latest trends, decode
+                the mysteries of responsive design, or even fancy sponsoring a
+                digital coffee to fuel the next innovation, I&apos;m just a
+                click away.
+              </p>
+            </section>
+
+            {/* Additional links */}
+            <section aria-labelledby='links-heading'>
+              <h2
+                id='links-heading'
+                className='text-2xl sm:text-3xl font-bold mb-3'
+              >
+                Links
+              </h2>
+              <div className='bg-orange-500 h-1 w-12 mb-8' aria-hidden='true' />
+              <ul className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
+                {additionalLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='flex items-center gap-1 text-lg font-bold text-white hover:text-orange-400 transition-colors'
+                    >
+                      {link.name} <span aria-hidden='true'>→</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* Contact Form */}
+            <section aria-labelledby='form-heading'>
+              <ContactForm />
+            </section>
+          </div>
+        </div>
       </div>
+
       <Footer text='Copyright Michaelxk ©' year='2024' />
     </>
   );
 };
+
 export default Contact;

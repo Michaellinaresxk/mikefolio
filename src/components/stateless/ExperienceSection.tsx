@@ -1,140 +1,93 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { EXPERIENCES, type Experience } from '@/data/experience';
 
-interface Experience {
-  title: string;
-  company: string;
-  period: string;
-  location: string;
-}
-
-const EXPERIENCES: Experience[] = [
-  {
-    title: 'Frontend Developer',
-    company: 'MONTREAL',
-    period: 'Feb 2024 – Apr 2026',
-    location: 'Remote',
-  },
-  {
-    title: 'Full Stack Developer',
-    company: 'EFS-INNOVATION',
-    period: 'Oct 2022 – Jan 2024',
-    location: 'Remote',
-  },
-  {
-    title: 'Freelance Frontend Developer',
-    company: 'PCYR Tech Solutions',
-    period: 'Jan 2019 – Jan 2022',
-    location: 'Hybrid',
-  },
-  // Agrega más experiencias aquí
-];
+/**
+ * FIX #9 — Datos movidos a /data/experience.ts
+ * FIX #12 — useReducedMotion: si el usuario tiene
+ *   "Reduce motion" activo en su sistema, las animaciones
+ *   se desactivan completamente.
+ */
 
 interface ExperienceItemProps {
   experience: Experience;
   index: number;
 }
 
-/**
- * Componente de experiencia individual
- */
 const ExperienceItem = ({ experience, index }: ExperienceItemProps) => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
-      className='border-b border-gray-600 pb-6 sm:pb-8 md:pb-10 last:border-b-0'
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      className='border-b border-gray-700 pb-6 sm:pb-8 last:border-b-0'
+      initial={shouldReduceMotion ? false : { opacity: 0, x: -20 }}
+      whileInView={shouldReduceMotion ? {} : { opacity: 1, x: 0 }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       viewport={{ once: true, margin: '-50px' }}
     >
-      <div className='flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4'>
-        {/* Lado izquierdo: Título y empresa */}
+      <div className='flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4'>
         <div className='flex-1'>
-          <h3 className='text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-white'>
+          <h3
+            className='font-bold text-white mb-1'
+            style={{ fontSize: 'clamp(1.1rem, 3vw, 2rem)' }}
+          >
             {experience.title}
           </h3>
-          <h5 className='text-base sm:text-lg text-gray-400 hover:text-gray-300 transition-colors'>
+          <p className='text-sm sm:text-base text-orange-400 font-medium'>
             {experience.company}
-          </h5>
+          </p>
         </div>
-
-        {/* Lado derecho: Período y ubicación */}
-        <div className='text-left sm:text-right flex-shrink-0 min-w-fit'>
-          <h6 className='text-sm sm:text-base md:text-lg text-gray-400 font-medium'>
+        <div className='flex-shrink-0 sm:text-right'>
+          <p className='text-sm sm:text-base text-gray-400'>
             {experience.period}
-          </h6>
-          <h6 className='text-sm sm:text-base md:text-lg text-gray-500'>
-            {experience.location}
-          </h6>
+          </p>
+          <p className='text-sm text-gray-500'>{experience.location}</p>
         </div>
       </div>
     </motion.div>
   );
 };
 
-/**
- * ExperienceSection Standalone
- * Sin dependencias externas, completamente responsive
- *
- * Props:
- * - imageSrc: URL o import de tu imagen
- * - imagePosition: "left" | "right" (default: "left")
- */
 interface ExperienceSectionProps {
   imageSrc?: string;
   imagePosition?: 'left' | 'right';
 }
 
 export const ExperienceSection = ({
-  imageSrc = '/portrait.jpg',
+  imageSrc,
   imagePosition = 'left',
 }: ExperienceSectionProps) => {
-  // Componente para la imagen
-  const ImageColumn = (
-    <div className='relative w-full h-64 sm:h-80 md:h-96 lg:h-full overflow-hidden'>
-      <Image
-        src={imageSrc}
-        alt='Professional Experience'
-        fill
-        className='object-contain object-center'
-        sizes='(max-width: 768px) 100vw, 50vw'
-        priority={false}
-      />
-    </div>
-  );
+  const shouldReduceMotion = useReducedMotion();
 
-  // Componente para el contenido
   const ContentColumn = (
     <motion.div
-      className='bg-dark-blue flex flex-col justify-center p-6 sm:p-8 md:p-12 lg:p-16 min-h-full'
-      initial={{ opacity: 0, x: imagePosition === 'left' ? 20 : -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      className='flex flex-col justify-center p-6 sm:p-8 md:p-12 lg:p-16'
+      initial={
+        shouldReduceMotion
+          ? false
+          : { opacity: 0, x: imagePosition === 'left' ? 20 : -20 }
+      }
+      whileInView={shouldReduceMotion ? {} : { opacity: 1, x: 0 }}
       transition={{ duration: 0.6 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: '-80px' }}
     >
-      <div className='max-w-2xl w-full space-y-6 sm:space-y-8 md:space-y-10'>
-        {/* Título */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+      <div className='max-w-2xl w-full space-y-6 sm:space-y-8'>
+        <h2
+          className='font-bold text-white'
+          style={{ fontSize: 'clamp(2rem, 6vw, 4rem)' }}
         >
-          <h2 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white'>
-            Experience{' '}
-            <span className='font-normal text-orange-500'>History</span>
-          </h2>
-        </motion.div>
+          Experience{' '}
+          <span className='font-normal text-orange-500'>History</span>
+        </h2>
 
-        {/* Lista de experiencias */}
         <div className='space-y-4 sm:space-y-6'>
-          {EXPERIENCES.map((experience, index) => (
+          {EXPERIENCES.map((exp, i) => (
             <ExperienceItem
-              key={`${experience.company}-${index}`}
-              experience={experience}
-              index={index}
+              key={`${exp.company}-${i}`}
+              experience={exp}
+              index={i}
             />
           ))}
         </div>
@@ -142,9 +95,27 @@ export const ExperienceSection = ({
     </motion.div>
   );
 
-  // Renderizar grid responsivo
+  /*
+    FIX #7 — Si no se pasa imageSrc, no renderizamos la columna de imagen
+    (evita el 404 silencioso con /portrait.jpg que no existe en /public).
+  */
+  const ImageColumn = imageSrc ? (
+    <div className='relative w-full h-64 sm:h-80 md:h-96 lg:h-full overflow-hidden'>
+      <Image
+        src={imageSrc}
+        alt='Experience section'
+        fill
+        className='object-cover object-center'
+        sizes='(max-width: 768px) 100vw, 50vw'
+      />
+    </div>
+  ) : null;
+
   return (
-    <section className='grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-screen'>
+    <section
+      className={`grid gap-0 ${ImageColumn ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'} min-h-0 lg:min-h-screen`}
+      aria-labelledby='experience-heading'
+    >
       {imagePosition === 'left' ? (
         <>
           {ImageColumn}

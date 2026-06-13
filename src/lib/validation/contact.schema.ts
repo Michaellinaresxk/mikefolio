@@ -1,4 +1,3 @@
-// lib/validations/contact.schema.ts
 import { z } from 'zod';
 
 export const contactFormSchema = z.object({
