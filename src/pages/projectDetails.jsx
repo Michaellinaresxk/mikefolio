@@ -1,327 +1,201 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { FaEye, FaGithub } from 'react-icons/fa';
+import Link from 'next/link';
+import { FaEye, FaGithub, FaArrowLeft } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import Heading from '../components/stateless/Heading';
 import Footer from '../components/stateless/Footer';
 import CallToAction from '../components/stateless/CallToAction';
 import Menu from '@/components/stateless/menu/Menu';
 import { projects } from '../data/projects';
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (d = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: 'easeOut', delay: d },
+  }),
+};
+
 const ProjectDetails = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [isLoading, setIsLoading] = useState(true);
+  const [ready, setReady] = useState(false);
 
-  const project = projects.find((pro) => pro.id === parseInt(id));
+  const project = projects.find((p) => p.id === parseInt(id));
 
   useEffect(() => {
-    setIsLoading(!project);
+    if (project) setReady(true);
   }, [project]);
 
-  if (isLoading || !project) {
+  if (!ready || !project) {
     return (
-      <div className='flex items-center justify-center min-h-screen text-white bg-black'>
+      <div className='flex items-center justify-center min-h-screen bg-black'>
         <motion.div
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className='text-2xl'
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 1.6, repeat: Infinity }}
+          className='text-white/40 text-sm tracking-widest uppercase'
         >
-          Cargando proyecto...
+          Loading…
         </motion.div>
       </div>
     );
   }
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
-    },
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8, ease: 'easeOut' },
-    },
-  };
-
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className='min-h-screen bg-black'>
       <Menu />
 
-      {/* Hero Section */}
-      <motion.section
-        variants={containerVariants}
-        initial='hidden'
-        animate='visible'
-        className='relative py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-gray-800 to-black overflow-hidden'
-      >
-        <div
-          className='absolute inset-0 opacity-10'
-          style={{
-            backgroundImage: `
-            linear-gradient(0deg, transparent 24%, rgba(255, 140, 0, 0.05) 25%, rgba(255, 140, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 140, 0, 0.05) 75%, rgba(255, 140, 0, 0.05) 76%, transparent 77%, transparent),
-            linear-gradient(90deg, transparent 24%, rgba(255, 140, 0, 0.05) 25%, rgba(255, 140, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 140, 0, 0.05) 75%, rgba(255, 140, 0, 0.05) 76%, transparent 77%, transparent)
-          `,
-            backgroundSize: '50px 50px',
-            animation: 'grid-fade 6s ease-in-out infinite',
-          }}
-        />
-
-        <motion.div variants={itemVariants} className='relative z-10 mb-12'>
-          <Heading
-            title1={project.title1}
-            title2={project.title2}
-            subtitle={project.subtitle}
-          />
-        </motion.div>
-
-        <style>{`
-          @keyframes grid-fade {
-            0% { opacity: 0.05; }
-            50% { opacity: 0.15; }
-            100% { opacity: 0.05; }
-          }
-        `}</style>
-      </motion.section>
-
-      {/* Main Content */}
-      <section className='relative bg-black py-16 px-4 sm:px-6 lg:px-8'>
+      {/* ── Hero ── */}
+      <section className='relative pt-24 pb-12 px-5 sm:px-8 max-w-6xl mx-auto'>
+        {/* Back */}
         <motion.div
-          variants={containerVariants}
+          custom={0}
+          variants={fadeUp}
           initial='hidden'
           animate='visible'
-          className='max-w-7xl mx-auto'
+          className='mb-8'
         >
-          <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12'>
-            {/* Sidebar - Left Column */}
-            <motion.div
-              variants={itemVariants}
-              className='lg:col-span-1 space-y-6'
+          <Link
+            href='/projects'
+            className='inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-white/35 hover:text-white/70 transition-colors'
+          >
+            <FaArrowLeft size={10} />
+            All projects
+          </Link>
+        </motion.div>
+
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center'>
+          {/* Left: title + meta */}
+          <motion.div
+            custom={0.05}
+            variants={fadeUp}
+            initial='hidden'
+            animate='visible'
+          >
+            <p className='text-xs font-semibold tracking-[0.3em] uppercase text-orange-500/70 mb-4'>
+              {project.subtitle}
+            </p>
+            <h1
+              className='font-bold text-white leading-tight mb-6'
+              style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
             >
-              {/* Project Image */}
-              <motion.div
-                variants={imageVariants}
-                className='relative rounded-xl overflow-hidden shadow-2xl group'
+              {project.title1}{' '}
+              <span className='text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-300'>
+                {project.title2}
+              </span>
+            </h1>
+
+            {/* Tech pills */}
+            {project.technologies?.length > 0 && (
+              <div className='flex flex-wrap gap-2 mb-8'>
+                {project.technologies.map((t) => (
+                  <span
+                    key={t}
+                    className='text-[11px] font-medium text-white/50 border border-white/10 rounded-full px-3 py-1'
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Action buttons */}
+            <div className='flex flex-col sm:flex-row gap-3'>
+              <a
+                href={project.projectLinks}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-orange-500 hover:bg-orange-400 text-white font-semibold text-sm transition-colors'
               >
-                <div className='absolute inset-0 bg-gradient-to-r from-orange-500 to-red-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 z-10' />
-                <Image
-                  alt={project.title1}
-                  className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
-                  src={project.appImage}
-                  width={400}
-                  height={300}
-                  priority
-                />
-              </motion.div>
-            </motion.div>
-
-            {/* Main Content - Right Column */}
-            <motion.div
-              variants={itemVariants}
-              className='lg:col-span-2 space-y-8'
-            >
-              {/* Description */}
-              <motion.div
-                variants={itemVariants}
-                className='bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-orange-500 transition-colors group'
-              >
-                <div className='flex items-center gap-3 mb-6'>
-                  <div className='w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full group-hover:h-10 transition-all' />
-                  <h2 className='text-3xl font-bold text-white'>Description</h2>
-                </div>
-
-                <div className='text-gray-300 text-lg leading-relaxed space-y-4'>
-                  {typeof project.description === 'string' ? (
-                    <p>{project.description}</p>
-                  ) : (
-                    project.description
-                  )}
-                </div>
-              </motion.div>
-
-              {/* Improvements */}
-              <motion.div
-                variants={itemVariants}
-                className='bg-gray-900 rounded-xl p-8 border border-gray-800 hover:border-orange-500 transition-colors'
-              >
-                <div className='flex items-center gap-3 mb-8'>
-                  <div className='w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full' />
-                  <h2 className='text-3xl font-bold text-white'>
-                    Improvements Implemented
-                  </h2>
-                </div>
-
-                <div className='space-y-4'>
-                  {project.whatIImprube?.map((improvement, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className='flex gap-4 p-4 bg-gray-800 rounded-lg border-l-4 border-orange-500 hover:bg-gray-700 transition-colors group'
-                    >
-                      <div className='flex-shrink-0'>
-                        <motion.div
-                          whileHover={{ scale: 1.2 }}
-                          className='flex items-center justify-center h-8 w-8 rounded-md bg-orange-500/20 group-hover:bg-orange-500/40 transition-colors'
-                        >
-                          <div className='w-2 h-2 bg-orange-500 rounded-full' />
-                        </motion.div>
-                      </div>
-                      <div className='flex-grow'>
-                        <p className='text-gray-300 text-lg'>{improvement}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-              {/* Technologies Card */}
-              <motion.div
-                variants={itemVariants}
-                className='bg-gray-900 rounded-xl p-6 border border-gray-800 hover:border-orange-500 transition-colors'
-              >
-                <div className='flex items-center gap-3 mb-6'>
-                  <div className='w-1 h-8 bg-gradient-to-b from-orange-500 to-red-600 rounded-full' />
-                  <h3 className='text-2xl font-bold text-white'>
-                    Technologies
-                  </h3>
-                </div>
-
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
-                  {project.technologies.map((technology, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ scale: 1.05, x: 5 }}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className='flex items-center gap-2 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-orange-500 transition-all group'
-                    >
-                      <div className='w-2 h-2 bg-orange-500 rounded-full group-hover:scale-150 transition-transform' />
-                      <span className='text-gray-300 text-sm font-medium'>
-                        {technology}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Action Buttons */}
-              <motion.div variants={itemVariants} className='space-y-3'>
-                <motion.a
-                  href={project.projectLinks}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className='w-full block'
-                >
-                  <button className='w-full flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-orange-500/50 group'>
-                    <FaEye className='group-hover:animate-pulse' />
-                    Real life Project
-                  </button>
-                </motion.a>
-
-                <motion.a
+                <FaEye size={13} />
+                Live project
+              </a>
+              {project.repoLink && (
+                <a
                   href={project.repoLink}
                   target='_blank'
                   rel='noopener noreferrer'
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className='w-full block'
+                  className='flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 hover:border-white/25 text-white/70 hover:text-white font-semibold text-sm transition-all'
                 >
-                  <button className='w-full flex items-center justify-center gap-2 bg-gray-900 border border-gray-700 hover:border-orange-500 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-300 group'>
-                    <FaGithub className='group-hover:rotate-12 transition-transform' />
-                    View Code
-                  </button>
-                </motion.a>
-              </motion.div>
-            </motion.div>
-          </div>
-        </motion.div>
+                  <FaGithub size={13} />
+                  View code
+                </a>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Right: image */}
+          <motion.div
+            custom={0.1}
+            variants={fadeUp}
+            initial='hidden'
+            animate='visible'
+            className='relative rounded-2xl overflow-hidden aspect-[4/3] bg-[#0f1117] border border-white/[0.06]'
+          >
+            <Image
+              alt={project.title1}
+              src={project.appImage}
+              fill
+              className='object-cover'
+              priority
+              sizes='(max-width: 1024px) 100vw, 50vw'
+            />
+            <div className='absolute inset-0 bg-black/20' />
+          </motion.div>
+        </div>
       </section>
 
-      {/* CTA Section */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <CallToAction />
-      </motion.section>
+      {/* ── Body ── */}
+      <section className='px-5 sm:px-8 max-w-6xl mx-auto pb-20 space-y-6'>
+        {/* Description */}
+        {project.description && (
+          <motion.div
+            custom={0.15}
+            variants={fadeUp}
+            initial='hidden'
+            animate='visible'
+            className='rounded-2xl bg-[#0f1117] border border-white/[0.06] p-7 sm:p-10'
+          >
+            <h2 className='text-xs font-bold tracking-[0.25em] uppercase text-white/30 mb-5'>
+              About this project
+            </h2>
+            <p className='text-white/65 text-base sm:text-lg leading-relaxed'>
+              {project.description}
+            </p>
+          </motion.div>
+        )}
 
-      {/* Footer */}
-      <Footer text='Copyright Michaelxk ©' year='2024' />
+        {/* Improvements */}
+        {project.whatIImprube?.length > 0 && (
+          <motion.div
+            custom={0.2}
+            variants={fadeUp}
+            initial='hidden'
+            animate='visible'
+            className='rounded-2xl bg-[#0f1117] border border-white/[0.06] p-7 sm:p-10'
+          >
+            <h2 className='text-xs font-bold tracking-[0.25em] uppercase text-white/30 mb-6'>
+              What I improved
+            </h2>
+            <ul className='space-y-3'>
+              {project.whatIImprube.map((item, i) => (
+                <li key={i} className='flex gap-4 items-start'>
+                  <span className='mt-[5px] flex-shrink-0 w-1.5 h-1.5 rounded-full bg-orange-500' />
+                  <span className='text-white/60 text-sm sm:text-base leading-relaxed'>
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </section>
 
-      {/* Global Styles */}
-      <style>{`
-        html {
-          scroll-behavior: smooth;
-        }
-
-        ::-webkit-scrollbar {
-          width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-          background: #1a1a1a;
-        }
-
-        ::-webkit-scrollbar-thumb {
-          background: linear-gradient(180deg, #ff8c00, #ff6347);
-          border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(180deg, #ffa500, #ff7f50);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .text-3xl {
-            font-size: 1.875rem;
-          }
-
-          .text-2xl {
-            font-size: 1.5rem;
-          }
-
-          .text-lg {
-            font-size: 1.125rem;
-          }
-        }
-      `}</style>
-    </motion.div>
+      <CallToAction />
+      <Footer text='Copyright Michaelxk ©' year={2026} />
+    </div>
   );
 };
 

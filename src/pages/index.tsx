@@ -136,7 +136,7 @@ export default function Home() {
       <WebsSection />
       <ServicesSection />
       <CallToAction />
-      <Footer text='Copyright Michaelxk ©' year={2024} />
+      <Footer text='Copyright Michaelxk ©' year={2026} />
     </>
   );
 }

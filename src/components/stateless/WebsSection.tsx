@@ -1,153 +1,132 @@
 'use client';
 import React from 'react';
-import { WebCard } from './cards/WebCard';
+import Image from 'next/image';
 import { uiDesign } from '../../data/UIDesign';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-const WebsSection = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
+const UICard = ({ title, imageUrl }: { title: string; imageUrl: any }) => (
+  <motion.article
+    initial={{ opacity: 0, y: 16 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-40px' }}
+    transition={{ duration: 0.4, ease: 'easeOut' }}
+    className='group relative overflow-hidden rounded-xl bg-[#0f1117] border border-white/[0.06] hover:border-white/[0.14] transition-all duration-500'
+  >
+    {/* Image */}
+    <div className='relative overflow-hidden aspect-[4/3]'>
+      <Image
+        src={imageUrl}
+        alt={title}
+        fill
+        className='object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]'
+        sizes='(max-width: 640px) 100vw, 50vw'
+      />
+      {/* Scrim */}
+      <div className='absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500' />
+      {/* Orange line grow */}
+      <div className='absolute bottom-0 left-0 h-[2px] w-8 bg-orange-500 group-hover:w-full transition-all duration-500 origin-left' />
+    </div>
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  };
+    {/* Title */}
+    <div className='px-4 py-3'>
+      <h3 className='text-sm font-semibold text-white/70 group-hover:text-white transition-colors duration-200 truncate'>
+        {title}
+      </h3>
+    </div>
+
+    {/* Glow on hover */}
+    <div
+      className='pointer-events-none absolute -inset-px rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500'
+      style={{ boxShadow: '0 0 28px 0 rgba(249,115,22,0.08)' }}
+      aria-hidden='true'
+    />
+  </motion.article>
+);
+
+const WebsSection = () => {
+  const preview = uiDesign.slice(0, 4);
 
   return (
-    <motion.section
-      className='relative w-full bg-black overflow-x-hidden py-16 sm:py-20 lg:py-24'
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      {/* Background Pattern */}
-      <div
-        className='absolute inset-0 opacity-5 pointer-events-none'
-        style={{
-          backgroundImage: `
-            linear-gradient(0deg, transparent 24%, rgba(255, 140, 0, 0.05) 25%, rgba(255, 140, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 140, 0, 0.05) 75%, rgba(255, 140, 0, 0.05) 76%, transparent 77%, transparent),
-            linear-gradient(90deg, transparent 24%, rgba(255, 140, 0, 0.05) 25%, rgba(255, 140, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 140, 0, 0.05) 75%, rgba(255, 140, 0, 0.05) 76%, transparent 77%, transparent)
-          `,
-          backgroundSize: '50px 50px',
-        }}
-      />
-
-      <div className='relative z-10 container mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12'>
-          {/* Left Column - Content */}
+    <section className='relative w-full bg-black py-20 sm:py-28 overflow-hidden'>
+      <div className='relative z-10 max-w-6xl mx-auto px-5 sm:px-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16 items-start'>
+          {/* ── Left: copy ── */}
           <motion.div
-            variants={itemVariants}
-            className='flex flex-col justify-start'
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className='lg:sticky lg:top-24 flex flex-col gap-6'
           >
-            <motion.h2
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className='text-4xl sm:text-5xl font-bold mb-6 leading-tight'
-            >
-              Latest{' '}
-              <span className='bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent'>
-                UI Designs
-              </span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className='text-gray-300 text-base sm:text-lg mb-8 leading-relaxed'
-            >
-              I&apos;ve been instrumental in creating impactful UI designs.
-              Here&apos;s a curated selection that highlights my expertise and
-              the results achieved.
-            </motion.p>
-
-            <Link href='/projects' className='w-full sm:w-auto'>
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 20px 40px rgba(249, 115, 22, 0.3)',
-                }}
-                whileTap={{ scale: 0.95 }}
-                className='w-full sm:w-auto bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white font-semibold rounded-lg px-6 sm:px-8 py-3 sm:py-4 transition-all duration-300 shadow-lg'
+            <div>
+              <p className='text-xs font-semibold tracking-[0.3em] uppercase text-orange-500/70 mb-4'>
+                UI Design
+              </p>
+              <h2
+                className='font-bold text-white leading-tight'
+                style={{ fontSize: 'clamp(1.8rem, 5vw, 3rem)' }}
               >
-                View all Projects
-              </motion.button>
+                Latest{' '}
+                <span className='text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-300'>
+                  UI Designs
+                </span>
+              </h2>
+            </div>
+
+            <p className='text-white/45 text-sm sm:text-base leading-relaxed'>
+              A selection of interface work spanning web apps, product pages,
+              and mobile concepts — all designed in Figma before touching code.
+            </p>
+
+            <Link
+              href='/projects'
+              className='inline-flex items-center gap-2 text-sm font-semibold text-orange-500 hover:text-orange-300 transition-colors group/cta w-fit'
+            >
+              View all designs
+              <span className='transition-transform duration-200 group-hover/cta:translate-x-1'>
+                →
+              </span>
             </Link>
           </motion.div>
 
-          {/* Right Column - Cards Grid */}
-          <motion.div
-            variants={containerVariants}
-            initial='hidden'
-            whileInView='visible'
-            viewport={{ once: true }}
-            className='lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'
-          >
-            {uiDesign.slice(0, 4).map((web) => (
-              <motion.div
-                key={web.id}
-                variants={itemVariants}
-                className='w-full'
-              >
-                <WebCard
-                  title={web.title}
-                  imageUrl={web.CardImage}
-                  cardWidht='100%'
-                />
-              </motion.div>
+          {/* ── Right: 2×2 grid ── */}
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+            {preview.map((item) => (
+              <UICard
+                key={item.id}
+                title={item.title}
+                imageUrl={item.CardImage}
+              />
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        {/* View More CTA */}
+        {/* ── Bottom CTA ── */}
         {uiDesign.length > 4 && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className='mt-12 sm:mt-16 flex justify-center'
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className='mt-16 pt-10 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4'
           >
-            <Link href='/projects' className='w-full sm:w-auto'>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className='text-center'
-              >
-                <p className='text-gray-400 text-base sm:text-lg mb-4'>
-                  Want to see more designs?
-                </p>
-                <p className='text-2xl sm:text-3xl font-bold text-white hover:text-orange-400 transition-colors cursor-pointer flex items-center justify-center gap-2'>
-                  Browse All Designs
-                  <span className='text-2xl'>→</span>
-                </p>
-              </motion.div>
+            <p className='text-white/35 text-sm'>
+              Showing 4 of {uiDesign.length} designs
+            </p>
+            <Link
+              href='/projects'
+              className='text-lg font-bold text-white hover:text-orange-400 transition-colors flex items-center gap-2 group/browse'
+            >
+              Browse all designs
+              <span className='transition-transform duration-200 group-hover/browse:translate-x-1'>
+                →
+              </span>
             </Link>
           </motion.div>
         )}
       </div>
-
-      {/* Decorative Elements */}
-      <div className='absolute top-20 right-10 w-40 sm:w-72 h-40 sm:h-72 bg-orange-500/10 rounded-full blur-3xl opacity-20 pointer-events-none' />
-      <div className='absolute bottom-0 left-10 w-40 sm:w-72 h-40 sm:h-72 bg-red-500/10 rounded-full blur-3xl opacity-20 pointer-events-none' />
-    </motion.section>
+    </section>
   );
 };
 
