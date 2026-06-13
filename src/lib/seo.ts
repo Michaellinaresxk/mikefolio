@@ -12,7 +12,7 @@
  *   </Head>
  */
 
-export const SITE_URL = 'https://mikefolio-kappa.vercel.app/';
+export const SITE_URL = 'https://mikefolio-kappa.vercel.app';
 export const SITE_NAME = 'Michael Linares — Frontend Developer';
 export const SITE_DESCRIPTION =
   'Portfolio of Michael Linares, Frontend Developer & Web Designer specializing in React, Next.js and interactive digital experiences.';
