@@ -1,12 +1,13 @@
 import { Inter } from 'next/font/google';
+import { useRef } from 'react';
+import { motion, useTransform, useScroll } from 'framer-motion';
+import PageHead from '@/components/PageHead';
 import Presentation from '@/components/stateless/Presentation';
 import Footer from '@/components/stateless/Footer';
 import CallToAction from '@/components/stateless/CallToAction';
 import ServicesSection from '@/components/stateless/ServicesSection';
 import WebsSection from '@/components/stateless/WebsSection';
 import { AboutMeText } from '@/components/stateless/AboutMeText';
-import { useRef } from 'react';
-import { motion, useTransform, useScroll } from 'framer-motion';
 import { WebCard } from '@/components/stateless/cards/WebCard';
 import Menu from '@/components/stateless/menu/Menu';
 import { pcyr } from '@/assets/img/webs/index';
@@ -24,27 +25,54 @@ export default function Home() {
     offset: ['start end', 'end start'],
   });
 
-  const horizontalRef = useTransform(scrollYProgress, [0, 1], ['1%', '-95%']);
-
+  const cardCount = websites.length;
+  const endX = `-${(cardCount - 1) * 90}vw`;
+  const horizontalRef = useTransform(scrollYProgress, [0, 1], ['0%', endX]);
   const fontSizeTransform = useTransform(
     scrollYProgress,
     [0, 0.5],
-    ['1.5rem', '10vw'],
+    ['1.5rem', '8vw'],
   );
 
   return (
     <>
+      {/* FIX #1 — SEO + OG meta para WhatsApp/LinkedIn/iMessage */}
+      <PageHead
+        title='Home'
+        description='Portfolio of Michael Linares, Frontend Developer & Web Designer specializing in React, Next.js and interactive digital experiences.'
+        path='/'
+        includeStructuredData
+      />
+
       <main
-        className={`transition-all ease-in flex min-h-screen flex-col items-center justify-between ${inter.className}`}
+        className={`flex min-h-screen flex-col items-center justify-between ${inter.className}`}
       >
         <Menu />
-        <div className='relative bg-home w-full h-screen bg-slate-900 bg-opacity-0 flex items-center pl-4 sm:pl-20'>
+
+        {/* ── HERO ── */}
+        <div
+          className='relative bg-home w-full flex items-center overflow-hidden'
+          style={{
+            height: '100svh',
+            paddingLeft: 'max(1.5rem, env(safe-area-inset-left))',
+            paddingRight: 'max(1.5rem, env(safe-area-inset-right))',
+            paddingTop: 'max(4rem, env(safe-area-inset-top))',
+            paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))',
+          }}
+        >
+          {/*
+            FIX #5 — Video solo en desktop. En mobile usamos la imagen
+            poster como fondo estático: ahorra ~2-5 MB de datos y elimina
+            el retraso de carga en conexiones lentas.
+          */}
           <video
             autoPlay
             muted
             loop
             playsInline
-            className='absolute top-0 left-0 w-full h-full object-cover -z-10'
+            poster='/og-image.jpg'
+            className='absolute inset-0 w-full h-full object-cover -z-10 hidden sm:block'
+            aria-hidden='true'
           >
             <source
               src='https://res.cloudinary.com/freelancer2222222222222222/video/upload/v1768397474/mike-folio/video-bg_mqooam.mp4'
@@ -52,7 +80,20 @@ export default function Home() {
             />
           </video>
 
-          <div className='container-presentation'>
+          {/* Mobile: imagen estática del poster como fondo */}
+          <div
+            className='absolute inset-0 -z-10 sm:hidden bg-cover bg-center'
+            style={{ backgroundImage: "url('/og-image.jpg')" }}
+            aria-hidden='true'
+          />
+
+          {/* Scrim para legibilidad */}
+          <div
+            className='absolute inset-0 -z-10 bg-black/45'
+            aria-hidden='true'
+          />
+
+          <div className='w-full max-w-2xl sm:pl-10 lg:pl-16'>
             <Presentation
               title1='Michael'
               title2='Linares'
@@ -60,36 +101,31 @@ export default function Home() {
             />
           </div>
         </div>
+
         <AboutMeText />
       </main>
 
+      {/* ── LATEST CREATIONS ── */}
       <div className='lasted_websites'>
         <motion.h2
-          className='text-3xl md:text-7xl font-bold text-center py-10 md:py-20 px-4 md:px-0'
+          className='font-bold text-center py-10 md:py-20 px-4'
           style={{ fontSize: fontSizeTransform }}
         >
           Latest Web{' '}
           <span className='font-normal text-orange-500'>Creations</span>
         </motion.h2>
 
-        {/* Scroll-driven horizontal carousel — same on mobile and desktop */}
-        <section className='relative h-[270vh]' ref={targetRef}>
+        <section className='relative h-[300vh]' ref={targetRef}>
           <div
             className='sticky top-0 flex items-center overflow-hidden'
-            style={{
-              height: '100svh',
-              touchAction: 'pan-y',
-            }}
+            style={{ height: '100svh' }}
           >
             <motion.div
-              className='flex gap-3 md:gap-4'
-              style={{
-                x: horizontalRef,
-                willChange: 'transform',
-              }}
+              className='flex gap-4 pl-4 md:pl-8'
+              style={{ x: horizontalRef, willChange: 'transform' }}
             >
               {websites.map((web, i) => (
-                <div key={`${web.id}-${i}`} className='p-2 md:p-4'>
+                <div key={`${web.id}-${i}`} className='flex-shrink-0'>
                   <WebCard
                     title={web.title}
                     imageUrl={web.CardImage}
@@ -102,18 +138,14 @@ export default function Home() {
         </section>
 
         <ImageAnimation image={pcyr} />
-        <Link
-          href={`/projects`}
-          className='flex justify-center mt-20 pb-20 text-sm md:text-base lg:text-lg font-medium leading-loose text-indigo-200 hover:text-indigo-100'
-        >
-          <h2 className='text-3xl font-bold mb-6'>
-            Explore My Projects{' '}
-            <span aria-hidden='true' className='ml-2'>
-              →
-            </span>
+
+        <Link href='/projects' className='flex justify-center mt-12 pb-16 px-4'>
+          <h2 className='text-2xl sm:text-3xl font-bold text-indigo-200 hover:text-indigo-100 transition-colors flex items-center gap-2'>
+            Explore My Projects <span aria-hidden='true'>→</span>
           </h2>
         </Link>
       </div>
+
       <WebsSection />
       <ServicesSection />
       <CallToAction />
