@@ -27,7 +27,7 @@ export const SITE_DESCRIPTION =
  * Crea el archivo en /public/og-image.jpg
  * Recomendación: screenshot de tu hero en desktop, con tu nombre y título encima.
  */
-export const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+export const OG_IMAGE = `${SITE_URL}/og-image-v2.jpg`;
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
 
